@@ -6,7 +6,7 @@ const { userModel } = require('../../models/user')
 module.exports = (request, response) => {
 
     const user = request.body
-
+    console.log(user)
     const schema = Joi.object({
         userName: Joi.string()
             .regex(/^[a-zA-Z0-9]+$/)
