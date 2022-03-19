@@ -36,10 +36,14 @@ const userSchema = new Schema({
             type: String,
             required: true
         },
-        image: {
+        posterPath: {
             type: String,
             required: true
-        }
+        },
+        runTime: {
+            type: Number,
+            required: true
+        },
     }]
 })
 

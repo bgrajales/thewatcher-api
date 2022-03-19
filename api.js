@@ -16,13 +16,19 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 4001
 
+const checkUserCredentials = require('./src/middlewares/checkUserCredentials')
+
 const register = require('./src/controllers/auth/register')
 const login = require('./src/controllers/auth/login')
 const refreshToken = require('./src/controllers/auth/refreshToken')
 
+const markMovieAsWatched = require('./src/controllers/movies/markMovieAsWatched')
+
 app.post('/register', register)
 app.post('/login', login)
 app.post('/refreshToken', refreshToken)
+
+app.post('/markMovieAsWatched', checkUserCredentials, markMovieAsWatched)
 
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,
