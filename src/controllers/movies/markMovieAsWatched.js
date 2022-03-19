@@ -25,7 +25,8 @@ module.exports = (request, response) => {
         user.save()
         
         response.status(200).json({
-            message: 'Movie marked as watched'
+            message: 'Movie marked as watched',
+            movies: user.movies
         })
 
         console.log(user)
