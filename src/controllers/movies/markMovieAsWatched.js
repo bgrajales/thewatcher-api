@@ -11,11 +11,14 @@ module.exports = (request, response) => {
         userName: user.userName
     }).then(user => {
 
+        console.log(user)
         user.movies.push({
             id: movie.id,
             posterPath: movie.posterPath,
             runTime: movie.runTime
         })
+
+        console.log(user.movies)
 
         markModified(user, 'movies')
 
