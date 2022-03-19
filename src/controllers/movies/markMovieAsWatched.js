@@ -22,11 +22,13 @@ module.exports = (request, response) => {
 
         markModified(user, 'movies')
 
-        user.save().then(() => {
-            response.status(200).end()
-        }).catch(error => {
-            response.status(500).end()
+        user.save()
+        
+        response.status(200).json({
+            message: 'Movie marked as watched'
         })
+
+        console.log(user)
 
     }).catch(error => {
         response.status(500).end()
