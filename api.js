@@ -16,7 +16,7 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 4001
 
-const checkUserCredentials = require('./src/middlewares/checkUserCredentials')
+// const checkUserCredentials = require('./src/middlewares/checkUserCredentials')
 
 const register = require('./src/controllers/auth/register')
 const login = require('./src/controllers/auth/login')
