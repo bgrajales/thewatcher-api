@@ -28,7 +28,7 @@ app.post('/register', register)
 app.post('/login', login)
 app.post('/refreshToken', refreshToken)
 
-app.post('/markMovieAsWatched', checkUserCredentials, markMovieAsWatched)
+app.post('/markMovieAsWatched', markMovieAsWatched)
 
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,
