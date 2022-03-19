@@ -20,7 +20,7 @@ module.exports = (request, response) => {
 
         console.log(user.movies)
 
-        markModified(user, 'movies')
+        user.markModified('movies')
 
         user.save()
         
