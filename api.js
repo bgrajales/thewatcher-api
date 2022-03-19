@@ -18,9 +18,11 @@ const PORT = process.env.PORT || 4001
 
 const register = require('./src/controllers/auth/register')
 const login = require('./src/controllers/auth/login')
+const refreshToken = require('./src/controllers/auth/refreshToken')
 
 app.post('/register', register)
 app.post('/login', login)
+app.post('/refreshToken', refreshToken)
 
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,
