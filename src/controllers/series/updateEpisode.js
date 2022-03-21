@@ -2,7 +2,7 @@ const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
 
-    const userToFind = request.body.user
+    const user = request.body.user
     const serieId = request.body.serieId
     const posterPath = request.body.posterPath
     const episodesTotal = request.body.serieTotalEpisodes
@@ -21,7 +21,7 @@ module.exports = (request, response) => {
     )
 
     userModel.findOne({
-        userName: userToFind.userName
+        userName: user.userName
     }).then(user => {
 
         if (user) {
@@ -31,7 +31,7 @@ module.exports = (request, response) => {
             user.series.find(serie => {
                 if (serie.id === serieId) {
 
-                    console.log('Series found')
+                    console.log('Series')
 
                     serie.episodesWatched++
                     
