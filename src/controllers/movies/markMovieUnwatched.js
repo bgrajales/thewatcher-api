@@ -2,7 +2,6 @@ const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
 
-    console.log(request.body)
     const user = request.body.user
     const movieId = request.body.movieId
 
@@ -10,7 +9,9 @@ module.exports = (request, response) => {
         userName: user.userName
     }).then(user => {
 
-        user.movies = user.movies.filter(movie => movie.id !== movieId)
+        const newArray = user.movies.filter(movie => movie.id !== movieId)
+
+        user.movies = newArray
 
         user.markModified('movies')
 
