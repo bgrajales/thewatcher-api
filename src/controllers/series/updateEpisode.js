@@ -62,8 +62,12 @@ module.exports = (request, response) => {
                         }]
                     }
 
+                    console.log(newSerie)
+
                     user.series.push(newSerie)
                 }
+
+                console.log(user.series)
 
                 user.markModified('series')
 
