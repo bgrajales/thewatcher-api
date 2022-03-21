@@ -30,7 +30,7 @@ module.exports = (request, response) => {
 
             const seriesIndex = user.series.findIndex(serie => serie.id === serieId)
 
-            if (seriesIndex !== -1) {
+            if (seriesIndex === -1) {
 
                 console.log('No series found')
 
