@@ -25,12 +25,16 @@ const refreshToken = require('./src/controllers/auth/refreshToken')
 const markMovieAsWatched = require('./src/controllers/movies/markMovieAsWatched')
 const markMovieUnwatched = require('./src/controllers/movies/markMovieUnwatched')
 
+const updateEpisode = require('./src/controllers/series/updateEpisode')
+
 app.post('/register', register)
 app.post('/login', login)
 app.post('/refreshToken', refreshToken)
 
 app.post('/markMovieAsWatched', markMovieAsWatched)
 app.post('/markMovieUnwatched', markMovieUnwatched)
+
+app.post('/updateEpisode', updateEpisode)
 
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,

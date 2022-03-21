@@ -22,12 +22,20 @@ const userSchema = new Schema({
             type: String,
             required: true
         },
-        image: {
+        posterPath: {
             type: String,
             required: true
         },
-        progress: {
+        episodesTotal: {
             type: Number,
+            required: true
+        },
+        episodesWatched: {
+            type: Number,
+            required: true
+        },
+        seasonsDetail: {
+            type: Array,
             required: true
         }
     }],
