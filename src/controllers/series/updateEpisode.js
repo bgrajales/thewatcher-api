@@ -10,6 +10,16 @@ module.exports = (request, response) => {
     const seasonNumber = request.body.seasonNumber
     const episodeNumber = request.body.episodeNumber
 
+    console.log(
+        user,
+        serieId,
+        posterPath,
+        episodesTotal,
+        seasonId,
+        seasonNumber,
+        episodeNumber
+    )
+
     userModel.findOne({
         userName: user.userName
     }).then(user => {
