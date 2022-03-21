@@ -28,7 +28,7 @@ module.exports = (request, response) => {
 
             console.log('Found User', user.userName)
 
-            const seriesIndex = user.series.findIndex(serie => serie.id === serieId)
+            const seriesIndex = user.series.findIndex(serie => parseInt(serie.id) === parseInt(serieId))
 
             if (seriesIndex === -1) {
 
@@ -55,23 +55,40 @@ module.exports = (request, response) => {
 
                 serie.episodesWatched++
                 
-                serie.seasonsDetail.find(season => {
-                    if (season.id === seasonId) {
-                        const watched = season.episodes.find((episode, index) => { 
-                            if (episode === episodeNumber) {
-                                return index
-                            }
-                        })
+                const seasonsDetailIndex = user.series[seriesIndex].seasonsDetail.findIndex(season => parseInt(season.id) === parseInt(seasonId))
 
-                        if (watched !== undefined) {
-                            season.episodes.splice(watched, 1)
-                        } else {
-                            season.episodes.push( episodeNumber )
-                        }
+                if (seasonsDetailIndex === -1) {
+
+                    console.log('No season found')
+
+                    const newSeason = {
+                        id: seasonId,
+                        number: seasonNumber,
+                        episodes: [ episodeNumber ]
                     }
-                })
+
+                    user.series[seriesIndex].seasonsDetail.push(newSeason)
+                } else {
+
+                    console.log('Season found')
+
+                    const episodesIndex = user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.findIndex(episode => parseInt(episode) === parseInt(episodeNumber))
+
+                    if (episodesIndex === -1) {
+
+                        console.log('No episode found')
+
+                        user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.push(episodeNumber)
+
+                    } else {
+
+                        console.log('Episode found')
+
+                        user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.splice(episodesIndex, 1)
+
+                    }
             
-            }
+                }
 
             console.log(user.series)
 
@@ -83,6 +100,8 @@ module.exports = (request, response) => {
                 message: 'Serie updated',
                 series: user.series
             })
+            
+        }
 
         } else {
 
