@@ -5,7 +5,7 @@ module.exports = (request, response) => {
     const user = request.body.user
     const serieId = request.body.serieId
     const posterPath = request.body.posterPath
-    const episodesTotal = request.body.seriesTotalEpisodes
+    const episodesTotal = request.body.serieTotalEpisodes
     const seasonId = request.body.seasonId
     const seasonNumber = request.body.seasonNumber
     const episodeNumber = request.body.episodeNumber
