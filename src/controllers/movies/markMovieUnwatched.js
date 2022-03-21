@@ -9,7 +9,7 @@ module.exports = (request, response) => {
         userName: user.userName
     }).then(user => {
 
-        const newArray = user.movies.filter(movie => movie.id !== movieId)
+        const newArray = user.movies.filter(movie => parseInt(movie.id) !== parseInt(movieId))
 
         user.movies = newArray
 
