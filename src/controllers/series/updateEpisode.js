@@ -28,33 +28,11 @@ module.exports = (request, response) => {
 
             console.log('Found User', user.userName)
 
-            user.series.find(serie => {
-                if (serie.id === serieId) {
+            const seriesIndex = user.series.findIndex(serie => serie.id === serieId)
 
-                    console.log('Series')
+            if (seriesIndex !== -1) {
 
-                    serie.episodesWatched++
-                    
-                    serie.seasonsDetail.find(season => {
-                        if (season.id === seasonId) {
-                            const watched = season.episodes.find((episode, index) => { 
-                                if (episode === episodeNumber) {
-                                    return index
-                                }
-                            })
-
-                            if (watched !== undefined) {
-                                season.episodes.splice(watched, 1)
-                            } else {
-                                season.episodes.push( episodeNumber )
-                            }
-
-                        }
-                    })
-
-                } else {
-
-                    console.log('No series found')
+                console.log('No series found')
 
                     const newSerie = {
                         id: serieId,
@@ -71,18 +49,39 @@ module.exports = (request, response) => {
                     console.log(newSerie)
 
                     user.series.push(newSerie)
-                }
+            } else {
 
-                console.log(user.series)
+                console.log('Series')
 
-                user.markModified('series')
+                serie.episodesWatched++
+                
+                serie.seasonsDetail.find(season => {
+                    if (season.id === seasonId) {
+                        const watched = season.episodes.find((episode, index) => { 
+                            if (episode === episodeNumber) {
+                                return index
+                            }
+                        })
 
-                user.save()
-
-                response.status(200).json({
-                    message: 'Serie updated',
-                    series: user.series
+                        if (watched !== undefined) {
+                            season.episodes.splice(watched, 1)
+                        } else {
+                            season.episodes.push( episodeNumber )
+                        }
+                    }
                 })
+            
+            }
+
+            console.log(user.series)
+
+            user.markModified('series')
+
+            user.save()
+
+            response.status(200).json({
+                message: 'Serie updated',
+                series: user.series
             })
 
         } else {
