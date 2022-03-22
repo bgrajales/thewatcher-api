@@ -52,8 +52,6 @@ module.exports = (request, response) => {
             } else {
 
                 console.log('Series')
-
-                user.series[seriesIndex].episodesWatched += 1
                 
                 const seasonsDetailIndex = user.series[seriesIndex].seasonsDetail.findIndex(season => parseInt(season.id) === parseInt(seasonId))
 
@@ -68,6 +66,9 @@ module.exports = (request, response) => {
                     }
 
                     user.series[seriesIndex].seasonsDetail.push(newSeason)
+
+                    user.series[seriesIndex].episodesWatched += 1
+
                 } else {
 
                     console.log('Season found')
@@ -79,12 +80,14 @@ module.exports = (request, response) => {
                         console.log('No episode found')
 
                         user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.push(episodeNumber)
+                        user.series[seriesIndex].episodesWatched += 1
 
                     } else {
 
                         console.log('Episode found')
 
                         user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.splice(episodesIndex, 1)
+                        user.series[seriesIndex].episodesWatched -= 1
 
                     }
             
