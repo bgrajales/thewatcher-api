@@ -53,14 +53,9 @@ module.exports = (request, response) => {
 
                 console.log('Series')
 
-                serie.episodesWatched = serie.episodesWatched + 1
+                user.series[seriesIndex].episodesWatched += 1
                 
-                console.log(series.episodesWatched)
-                console.log(user.series[seriesIndex].seasonDetail)
-
                 const seasonsDetailIndex = user.series[seriesIndex].seasonsDetail.findIndex(season => parseInt(season.id) === parseInt(seasonId))
-
-                console.log(seasonDetailIndex)
 
                 if (seasonsDetailIndex === -1) {
 
