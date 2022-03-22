@@ -49,6 +49,7 @@ module.exports = (request, response) => {
                     console.log(newSerie)
 
                     user.series.push(newSerie)
+
             } else {
 
                 console.log('Series')
@@ -93,6 +94,8 @@ module.exports = (request, response) => {
             
                 }
 
+            }
+
             console.log(user.series)
 
             user.markModified('series')
@@ -103,8 +106,6 @@ module.exports = (request, response) => {
                 message: 'Serie updated',
                 series: user.series
             })
-
-        }
 
         } else {
 
