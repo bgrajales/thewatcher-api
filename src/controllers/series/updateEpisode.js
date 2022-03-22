@@ -90,6 +90,10 @@ module.exports = (request, response) => {
                         user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.splice(episodesIndex, 1)
                         user.series[seriesIndex].episodesWatched -= 1
 
+                        if ( user.series[seriesIndex].episodesWatched === 0 ) {
+                            user.series.splice(seriesIndex, 1)
+                        }
+
                     }
             
                 }
