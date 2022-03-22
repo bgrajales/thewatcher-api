@@ -42,7 +42,6 @@ module.exports = (request, response) => {
                         seasonsDetail: [{
                             id: seasonId,
                             number: seasonNumber,
-                            seasonEpisodesWatched: 1,
                             episodes: [ episodeNumber ]
                         }]
                     }
@@ -64,7 +63,6 @@ module.exports = (request, response) => {
                     const newSeason = {
                         id: seasonId,
                         number: seasonNumber,
-                        seasonEpisodesWatched: 1,
                         episodes: [ episodeNumber ]
                     }
 
@@ -84,7 +82,6 @@ module.exports = (request, response) => {
 
                         user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.push(episodeNumber)
                         user.series[seriesIndex].episodesWatched += 1
-                        user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].seasonEpisodesWatched += 1
 
                     } else {
 
@@ -92,7 +89,6 @@ module.exports = (request, response) => {
 
                         user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.splice(episodesIndex, 1)
                         user.series[seriesIndex].episodesWatched -= 1
-                        user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].seasonEpisodesWatched -= 1
 
                         if ( user.series[seriesIndex].episodesWatched === 0 ) {
                             user.series.splice(seriesIndex, 1)
