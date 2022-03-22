@@ -55,6 +55,9 @@ module.exports = (request, response) => {
 
                 serie.episodesWatched = serie.episodesWatched + 1
                 
+                console.log(series.episodesWatched)
+                console.log(user.series[seriesIndex].seasonDetail)
+
                 const seasonsDetailIndex = user.series[seriesIndex].seasonsDetail.findIndex(season => parseInt(season.id) === parseInt(seasonId))
 
                 console.log(seasonDetailIndex)
