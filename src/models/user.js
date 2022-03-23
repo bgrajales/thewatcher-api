@@ -52,7 +52,11 @@ const userSchema = new Schema({
             type: Number,
             required: true
         },
-    }]
+    }],
+    profilePicture: {
+        type: String,
+        required: false
+    }
 })
 
 const userModel = model('users', userSchema)
