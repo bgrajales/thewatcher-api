@@ -4,7 +4,9 @@ cloudinary.config( process.env.CLOUDINARY_URL );
 
 module.exports = (req, res) => {
 
-    const { userId } = req.params;
+    console.log(req)
+
+    const { user } = req.params;
     const { file } = req;
     
     cloudinary.uploader.upload(file.path, (err, result) => {
@@ -15,7 +17,7 @@ module.exports = (req, res) => {
         });
         }
     
-        User.findByIdAndUpdate(userId, {
+        User.findByIdAndUpdate( user.id , {
         $set: {
             profilePicture: result.secure_url
         }
