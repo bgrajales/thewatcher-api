@@ -23,6 +23,12 @@ const returnCredentials = (user, response) => {
         type: 'REFRESH'
     }, process.env.JWT_KEY, { expiresIn: '30d' })
 
+    console.log(
+        'token: ', token,
+        'refreshToken: ', refreshToken,
+        'user: ', responseUser
+    )
+    
     response.json({
         user: responseUser,
         token: token,
@@ -61,7 +67,7 @@ module.exports = (request, response) => {
                 const match = bcrypt.compareSync(user.password, existingUser.password)
 
                 if (match) {
-
+                    console.log('match')
                     returnCredentials(existingUser, response)
 
                 } else {
