@@ -57,7 +57,7 @@ module.exports = (request, response) => {
         }).then(existingUser => {
 
             if (existingUser) {
-
+                console.log(existingUser.userName)
                 const match = bcrypt.compareSync(user.password, existingUser.password)
 
                 if (match) {
