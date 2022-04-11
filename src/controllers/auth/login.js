@@ -8,8 +8,6 @@ const returnCredentials = (user, response) => {
     const responseUser = user.toJSON()
 
     delete responseUser.password
-    delete responseUser.series
-    delete responseUser.movies
 
     const token = jwt.sign({
         id: user._id,
@@ -28,7 +26,7 @@ const returnCredentials = (user, response) => {
         'refreshToken: ', refreshToken,
         'user: ', responseUser
     )
-    
+
     response.json({
         user: responseUser,
         token: token,
