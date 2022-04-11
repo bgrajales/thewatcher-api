@@ -10,29 +10,15 @@ module.exports = (request, response) => {
     const seasonNumber = request.body.seasonNumber
     const episodeNumber = request.body.episodeNumber
 
-    console.log(
-        user,
-        serieId,
-        posterPath,
-        episodesTotal,
-        seasonId,
-        seasonNumber,
-        episodeNumber
-    )
-
     userModel.findOne({
         userName: user.userName
     }).then(user => {
 
         if (user) {
 
-            console.log('Found User', user.userName)
-
             const seriesIndex = user.series.findIndex(serie => parseInt(serie.id) === parseInt(serieId))
 
             if (seriesIndex === -1) {
-
-                console.log('No series found')
 
                     const newSerie = {
                         id: serieId,
@@ -46,19 +32,13 @@ module.exports = (request, response) => {
                         }]
                     }
 
-                    console.log(newSerie)
-
                     user.series.push(newSerie)
 
             } else {
 
-                console.log('Series')
-                
                 const seasonsDetailIndex = user.series[seriesIndex].seasonsDetail.findIndex(season => parseInt(season.id) === parseInt(seasonId))
 
                 if (seasonsDetailIndex === -1) {
-
-                    console.log('No season found')
 
                     const newSeason = {
                         id: seasonId,
@@ -72,20 +52,14 @@ module.exports = (request, response) => {
 
                 } else {
 
-                    console.log('Season found')
-
                     const episodesIndex = user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.findIndex(episode => parseInt(episode) === parseInt(episodeNumber))
 
                     if (episodesIndex === -1) {
-
-                        console.log('No episode found')
 
                         user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.push(episodeNumber)
                         user.series[seriesIndex].episodesWatched += 1
 
                     } else {
-
-                        console.log('Episode found')
 
                         user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.splice(episodesIndex, 1)
                         user.series[seriesIndex].episodesWatched -= 1
@@ -99,8 +73,6 @@ module.exports = (request, response) => {
                 }
 
             }
-
-            console.log(user.series)
 
             user.markModified('series')
 

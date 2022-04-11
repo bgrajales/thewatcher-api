@@ -6,7 +6,6 @@ const { userModel } = require('../../models/user')
 module.exports = (request, response) => {
 
     const user = request.body
-    console.log(user)
     const schema = Joi.object({
         userName: Joi.string()
             .regex(/^[a-zA-Z0-9]+$/)
@@ -28,7 +27,6 @@ module.exports = (request, response) => {
 
     const validationResult = schema.validate(user)
 
-    console.log(validationResult)
 
     if (!validationResult.error) {
 
@@ -52,21 +50,20 @@ module.exports = (request, response) => {
                         })
                     } else {
 
-                        console.log('doesnt exist')
                         user.password = bcrypt.hashSync(user.password, 10)
 
                         userModel.create({
                             userName: user.userName,
                             email: user.email,
                             password: user.password,
-                            region: user.region
+                            region: user.region,
+                            series: [],
+                            movies: [],
                         }).then(createdUser => {
 
                             const userResponse = createdUser.toJSON()
 
                             delete userResponse.password
-                            delete userResponse.series
-                            delete userResponse.movies
 
                             const token = jwt.sign({
                                 id: userResponse._id,

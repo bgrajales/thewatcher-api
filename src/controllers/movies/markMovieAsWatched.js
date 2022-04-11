@@ -2,7 +2,6 @@ const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
 
-    console.log(request.body)
     const user = request.body.user
     const movie = request.body.movie
 
