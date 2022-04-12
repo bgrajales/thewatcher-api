@@ -13,9 +13,9 @@ module.exports = (request, response) => {
 
         if(forumExist) {
 
-            const comment = {
-                userName: userName,
-                comment: comment,
+            const newComment = {
+                userName,
+                comment,
                 date: new Date(),
                 likes: 0,
                 replies: []
@@ -25,7 +25,7 @@ module.exports = (request, response) => {
                 elementId: elementId
             }, {
                 $push: {
-                    comments: comment
+                    comments: newComment
                 }
             }, {
                 new: true
