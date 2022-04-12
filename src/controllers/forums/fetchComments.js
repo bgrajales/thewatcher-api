@@ -2,7 +2,7 @@ const { forumModel } = require('../../models/forum')
 
 module.exports = (request, response) => {
 
-    const elementId = request.params.elementId
+    const elementId = request.query.elementId
     
     console.log(elementId)
 
