@@ -4,6 +4,8 @@ module.exports = (request, response) => {
 
     const forumData = request.body.forumData
 
+    console.log(forumData)
+
     forumModel.findOne({
         elementId: forumData.elementId
     }).then(forumExist => {
