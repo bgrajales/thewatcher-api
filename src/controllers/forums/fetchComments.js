@@ -4,12 +4,15 @@ module.exports = (request, response) => {
 
     const elementId = request.params.elementId
     
+    console.log(elementId)
+
     forumModel.findOne({
         elementId: elementId
     }).then(forumExist => {
 
         if(forumExist) {
 
+            console.log(forumExist)
             response.status(200).json({
                 success: true,
                 forum: forumExist
