@@ -2,26 +2,27 @@ const { forumModel } = require('../../models/forum')
 
 module.exports = (request, response) => {
 
-    const forumData = request.body.forumData
-
-    console.log(forumData)
+    const userName = request.body.userName 
+    const comment = request.body.comment
+    const elementId = request.body.elementId
+    const type = request.body.type
 
     forumModel.findOne({
-        elementId: forumData.elementId
+        elementId: elementId
     }).then(forumExist => {
 
         if(forumExist) {
 
             const comment = {
-                userName: forumData.userName,
-                comment: forumData.comment,
+                userName: userName,
+                comment: comment,
                 date: new Date(),
                 likes: 0,
                 replies: []
             }
 
             forumModel.findOneAndUpdate({
-                elementId: forumData.elementId
+                elementId: elementId
             }, {
                 $push: {
                     comments: comment
@@ -47,11 +48,11 @@ module.exports = (request, response) => {
         } else {
 
             const newForum = {
-                type: forumData.type,
-                elementId: forumData.elementId,
+                type: type,
+                elementId: elementId,
                 comments: [{
-                    userName: forumData.userName,
-                    comment: forumData.comment,
+                    userName: userName,
+                    comment: comment,
                     date: new Date(),
                     likes: 0,
                     replies: []
