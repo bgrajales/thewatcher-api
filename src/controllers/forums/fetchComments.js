@@ -2,7 +2,7 @@ const { forumModel } = require('../../models/forum')
 
 module.exports = (request, response) => {
 
-    const elementId = request.body.elementId
+    const elementId = request.params.elementId
     
     forumModel.findOne({
         elementId: elementId
