@@ -24,9 +24,7 @@ module.exports = (request, response) => {
             forumModel.findOneAndUpdate({
                 elementId: elementId
             }, {
-                $pop: {
-                    comments: newComment
-                }
+                $push: { comments: newComment, $position: 0 },
             }, {
                 new: true
             }).then(forum => {
