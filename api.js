@@ -28,6 +28,7 @@ const markMovieUnwatched = require('./src/controllers/movies/markMovieUnwatched'
 const updateEpisode = require('./src/controllers/series/updateEpisode')
 
 const postComment = require('./src/controllers/forums/postComment')
+const fetchComments = require('./src/controllers/forums/fetchComments')
 
 app.post('/register', register)
 app.post('/login', login)
@@ -39,6 +40,7 @@ app.post('/markMovieUnwatched', markMovieUnwatched)
 app.post('/updateEpisode', updateEpisode)
 
 app.post('/postComment', postComment)
+app.get('/fetchComments', fetchComments)
 
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,
