@@ -5,7 +5,7 @@ module.exports = (request, response) => {
 
     const requestUserName = request.body.userName 
     const commentId = request.body.commentId
-    const forumId = request.body.stringElementId
+    const forumId = request.body.elementId
 
     console.log(requestUserName, commentId, forumId)
 
@@ -29,7 +29,7 @@ module.exports = (request, response) => {
             userExist.save()
 
             forumModel.findOne({
-                _id: forumId
+                elementId: forumId
             }).then(forumExist => {
 
                 if(forumExist) {
