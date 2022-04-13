@@ -2,13 +2,13 @@ const { userModel } = require('../../models/forum')
 
 module.exports = (request, response) => {
 
-    const userName = request.body.userName 
+    const requestUserName = request.body.userName 
     const commentId = request.body.commentId
 
     console.log(userName, commentId)
 
     userModel.findOne({
-        userName: userName
+        userName: requestUserName
     }).then(userExist => {
 
         if(userExist) {
