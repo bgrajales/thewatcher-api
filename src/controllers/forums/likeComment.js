@@ -5,6 +5,8 @@ module.exports = (request, response) => {
     const userName = request.body.userName 
     const commentId = request.body.commentId
 
+    console.log(userName, commentId)
+
     userModel.findOne({
         userName: userName
     }).then(userExist => {
