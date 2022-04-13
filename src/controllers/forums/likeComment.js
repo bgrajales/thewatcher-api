@@ -33,6 +33,7 @@ module.exports = (request, response) => {
 
                 if(commentExist) {
 
+                    console.log(commentExist)
                     if(action === 'like') {
                         commentExist.likes += 1
                     } else {
@@ -42,13 +43,13 @@ module.exports = (request, response) => {
                     commentExist.markModified('likes')
                     commentExist.save()
 
-                    response.json({
+                    response.status(200).json({
                         success: true,
                         action: action
                     })
 
                 } else {
-                    response.json({
+                    response.status(200).json({
                         success: false,
                         message: 'Comment not found'
                     })
