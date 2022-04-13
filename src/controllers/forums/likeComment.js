@@ -1,4 +1,4 @@
-const { userModel } = require('../../models/forum')
+const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
 
