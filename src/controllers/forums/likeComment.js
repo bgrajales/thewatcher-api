@@ -13,17 +13,21 @@ module.exports = (request, response) => {
 
         if(userExist) {
 
+            let action
+
             if(userExist.likedComments.includes(commentId)) {
                 userExist.likedComments.splice(userExist.likedComments.indexOf(commentId), 1)
+                action = 'unlike'
             } else {
                 userExist.likedComments.push(commentId)
+                action = 'like'
             }
             
             userExist.markModified('likedComments')
             userExist.save()
             response.status(200).json({
                 success: true,
-                user: userExist
+                action: action
             })
 
         } else {
