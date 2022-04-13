@@ -1,4 +1,5 @@
 const { userModel } = require('../../models/user')
+const { forumModel } = require('../../models/forum')
 
 module.exports = (request, response) => {
 
@@ -25,9 +26,34 @@ module.exports = (request, response) => {
             
             userExist.markModified('likedComments')
             userExist.save()
-            response.status(200).json({
-                success: true,
-                action: action
+
+            forumModel.findOne({
+                _id: commentId
+            }).then(commentExist => {
+
+                if(commentExist) {
+
+                    if(action === 'like') {
+                        commentExist.likes += 1
+                    } else {
+                        commentExist.likes -= 1
+                    }
+
+                    commentExist.markModified('likes')
+                    commentExist.save()
+
+                    response.json({
+                        success: true,
+                        action: action
+                    })
+
+                } else {
+                    response.json({
+                        success: false,
+                        message: 'Comment not found'
+                    })
+                }
+
             })
 
         } else {
