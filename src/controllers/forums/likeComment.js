@@ -5,9 +5,9 @@ module.exports = (request, response) => {
 
     const requestUserName = request.body.userName 
     const commentId = request.body.commentId
-    const forumId = request.body.elementId
+    const forumId = request.body.stringElementId
 
-    console.log(requestUserName, commentId)
+    console.log(requestUserName, commentId, stringElementId)
 
     userModel.findOne({
         userName: requestUserName
