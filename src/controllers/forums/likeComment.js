@@ -13,11 +13,14 @@ module.exports = (request, response) => {
 
         if(userExist) {
 
-            userExist.likedComments.push(commentId)
-
+            if(userExist.likedComments.includes(commentId)) {
+                userExist.likedComments.splice(userExist.likedComments.indexOf(commentId), 1)
+            } else {
+                userExist.likedComments.push(commentId)
+            }
+            
             userExist.markModified('likedComments')
             userExist.save()
-
             response.status(200).json({
                 success: true,
                 user: userExist
