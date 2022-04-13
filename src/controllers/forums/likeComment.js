@@ -5,7 +5,7 @@ module.exports = (request, response) => {
     const requestUserName = request.body.userName 
     const commentId = request.body.commentId
 
-    console.log(userName, commentId)
+    console.log(requestUserName, commentId)
 
     userModel.findOne({
         userName: requestUserName
