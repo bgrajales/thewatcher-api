@@ -59,6 +59,7 @@ module.exports = (request, response) => {
                             region: user.region,
                             series: [],
                             movies: [],
+                            likedComments: [],
                         }).then(createdUser => {
 
                             const userResponse = createdUser.toJSON()

@@ -29,6 +29,7 @@ const updateEpisode = require('./src/controllers/series/updateEpisode')
 
 const postComment = require('./src/controllers/forums/postComment')
 const fetchComments = require('./src/controllers/forums/fetchComments')
+const likeComment = require('./src/controllers/forums/likeComment')
 
 app.post('/register', register)
 app.post('/login', login)
@@ -40,6 +41,7 @@ app.post('/markMovieUnwatched', markMovieUnwatched)
 app.post('/updateEpisode', updateEpisode)
 
 app.post('/postComment', postComment)
+app.post('/likeComment', likeComment)
 app.get('/fetchComments', fetchComments)
 
 mongoose.connect(getDbConnectionString(), {

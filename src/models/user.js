@@ -1,3 +1,4 @@
+const { string } = require('joi')
 const { model, Schema } = require('mongoose')
 
 const userSchema = new Schema({
@@ -52,6 +53,9 @@ const userSchema = new Schema({
             type: Number,
             required: true
         },
+    }],
+    likedComments: [{
+        type: String,
     }],
     profilePicture: {
         type: String,
