@@ -5,6 +5,7 @@ module.exports = (request, response) => {
 
     const requestUserName = request.body.userName 
     const commentId = request.body.commentId
+    const forumId = request.body.elementId
 
     console.log(requestUserName, commentId)
 
@@ -28,20 +29,23 @@ module.exports = (request, response) => {
             userExist.save()
 
             forumModel.findOne({
-                _id: commentId
-            }).then(commentExist => {
+                _id: forumId
+            }).then(forumExist => {
 
-                if(commentExist) {
+                if(forumExist) {
 
-                    console.log(commentExist)
-                    if(action === 'like') {
-                        commentExist.likes += 1
-                    } else {
-                        commentExist.likes -= 1
-                    }
+                    forumExist.comments.forEach(comment => {
+                        if(comment._id == commentId) {
+                            if(action == 'like') {
+                                comment.likes++
+                            } else {
+                                comment.likes--
+                            }
+                        }
+                    })
 
-                    commentExist.markModified('likes')
-                    commentExist.save()
+                    forumExist.markModified('comments')
+                    forumExist.save()
 
                     response.status(200).json({
                         success: true,
@@ -51,7 +55,7 @@ module.exports = (request, response) => {
                 } else {
                     response.status(200).json({
                         success: false,
-                        message: 'Comment not found'
+                        message: 'Forum not found'
                     })
                 }
 
