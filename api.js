@@ -38,7 +38,6 @@ app.post('/login', login)
 app.post('/refreshToken', refreshToken)
 app.post('/setGenres', setGenres)
 
-
 app.post('/markMovieAsWatched', markMovieAsWatched)
 app.post('/markMovieUnwatched', markMovieUnwatched)
 
