@@ -57,6 +57,8 @@ module.exports = (request, response) => {
                             email: user.email,
                             password: user.password,
                             region: user.region,
+                            seriesGenres: [],
+                            moviesGenres: [],
                             series: [],
                             movies: [],
                             likedComments: [],

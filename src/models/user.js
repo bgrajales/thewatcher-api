@@ -18,6 +18,12 @@ const userSchema = new Schema({
         type: String, 
         required: true 
     },
+    seriesGenres: [{
+        type: String,
+    }],
+    moviesGenres: [{
+        type: String,
+    }],
     series: [{
         id: {
             type: String,
