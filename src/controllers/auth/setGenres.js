@@ -10,8 +10,8 @@ module.exports = (request, response) => {
         userName: userNameSearch
     }).then(userFound => {
         
-            console.log(moviesGenres, seriesGenres)
-            console.log(userFound)
+            userFound.moviesGenres = []
+            userFound.seriesGenres = []
 
             moviesGenres.forEach(item => {
                 userFound.moviesGenres.push({
@@ -30,7 +30,6 @@ module.exports = (request, response) => {
             userFound.markModified('moviesGenres')
             userFound.markModified('seriesGenres')
 
-            console.log(userFound.moviesGenres, userFound.seriesGenres)
 
             userFound.save().then(() => {
                 response.status(200).json({
