@@ -2,12 +2,12 @@ const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
 
-    const user = request.body
+    const userNameSearch = request.body
     const moviesGenres = request.body.moviesGenres
     const seriesGenres = request.body.seriesGenres
 
     userModel.findOne({
-        username: user.username
+        username: userNameSearch
     }).then(userFound => {
 
         if (userFound) {
