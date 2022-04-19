@@ -6,10 +6,13 @@ module.exports = (request, response) => {
     const moviesGenres = request.body.moviesGenres
     const seriesGenres = request.body.seriesGenres
 
+    console.log(userNameSearch, moviesGenres, seriesGenres)
+
     userModel.findOne({
         userName: userNameSearch
     }).then(userFound => {
 
+        console.log(userFound)
         if (userFound) {
             userFound.moviesGenres = moviesGenres
             userFound.seriesGenres = seriesGenres
@@ -17,6 +20,8 @@ module.exports = (request, response) => {
             user.markModified('moviesGenres')
             user.markModified('seriesGenres')
 
+            console.log(userFound)
+            
             userFound.save().then(() => {
                 response.status(200).json({
                     success: true,
