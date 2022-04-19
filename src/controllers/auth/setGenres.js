@@ -3,8 +3,8 @@ const { userModel } = require('../../models/user')
 module.exports = (request, response) => {
 
     const userNameSearch = request.body.userName
-    const moviesGenres = request.body.moviesGenres
-    const seriesGenres = request.body.seriesGenres
+    const moviesGenres = request.body.moviesGenresPicked
+    const seriesGenres = request.body.seriesGenresPicked
 
     console.log(userNameSearch, moviesGenres, seriesGenres)
 
@@ -21,7 +21,7 @@ module.exports = (request, response) => {
             user.markModified('seriesGenres')
 
             console.log(userFound)
-            
+
             userFound.save().then(() => {
                 response.status(200).json({
                     success: true,
