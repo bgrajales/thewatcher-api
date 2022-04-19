@@ -22,6 +22,8 @@ module.exports = (request, response) => {
             userFound.markModified('moviesGenres')
             userFound.markModified('seriesGenres')
 
+            console.log(userFound.moviesGenres, userFound.seriesGenres)
+
             userFound.save().then(() => {
                 response.status(200).json({
                     message: 'Genres updated successfully'
@@ -37,36 +39,6 @@ module.exports = (request, response) => {
                 message: 'User not found'
             })
         }
-
-
-        // console.log(userFound)
-        // if (userFound) {
-        //     userFound.moviesGenres = moviesGenres
-        //     userFound.seriesGenres = seriesGenres
-
-        //     user.markModified('moviesGenres')
-        //     user.markModified('seriesGenres')
-
-        //     console.log(userFound)
-
-        //     userFound.save().then(() => {
-        //         response.status(200).json({
-        //             success: true,
-        //             message: 'Genres updated successfully'
-        //         })
-        //     }).catch(err => {
-        //         response.status(500).json({
-        //             success: false,
-        //             message: 'Something went wrong'
-        //         })
-        //     })
-        // } else {
-
-        //     response.status(404).json({
-        //         success: false,
-        //         message: 'User not found'
-        //     })
-        // }
 
     }).catch(err => {
 
