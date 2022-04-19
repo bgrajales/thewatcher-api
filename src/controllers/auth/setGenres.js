@@ -9,6 +9,9 @@ module.exports = (request, response) => {
     userModel.findOne({
         userName: userNameSearch
     }).then(userFound => {
+        
+            console.log(moviesGenres, seriesGenres)
+            console.log(userFound)
 
             moviesGenres.forEach(genre => {
                 userFound.moviesGenres.push(genre)
