@@ -2,7 +2,7 @@ const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
 
-    const userNameSearch = request.body
+    const userNameSearch = request.body.userName
     const moviesGenres = request.body.moviesGenres
     const seriesGenres = request.body.seriesGenres
 
