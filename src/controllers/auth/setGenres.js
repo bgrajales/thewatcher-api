@@ -11,8 +11,8 @@ module.exports = (request, response) => {
     }).then(userFound => {
 
         if (userFound) {
-            userFound.moviesGenres = moviesGenres
-            userFound.seriesGenres = seriesGenres
+            userFound.moviesGenres.push(moviesGenres)
+            userFound.seriesGenres.push(seriesGenres)
 
             userFound.markModified('moviesGenres')
             userFound.markModified('seriesGenres')
