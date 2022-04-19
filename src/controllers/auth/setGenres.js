@@ -11,8 +11,13 @@ module.exports = (request, response) => {
     }).then(userFound => {
 
         if (userFound) {
-            userFound.moviesGenres.push(moviesGenres)
-            userFound.seriesGenres.push(seriesGenres)
+            moviesGenres.forEach(genre => {
+                userFound.moviesGenres.push(genre)
+            })
+
+            seriesGenres.forEach(genre => {
+                userFound.seriesGenres.push(genre)
+            })
 
             userFound.markModified('moviesGenres')
             userFound.markModified('seriesGenres')
