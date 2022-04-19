@@ -10,7 +10,6 @@ module.exports = (request, response) => {
         userName: userNameSearch
     }).then(userFound => {
 
-        if (userFound) {
             moviesGenres.forEach(genre => {
                 userFound.moviesGenres.push(genre)
             })
@@ -34,11 +33,6 @@ module.exports = (request, response) => {
                     error: err
                 })
             })
-        } else {
-            response.status(404).json({
-                message: 'User not found'
-            })
-        }
 
     }).catch(err => {
 
