@@ -13,12 +13,18 @@ module.exports = (request, response) => {
             console.log(moviesGenres, seriesGenres)
             console.log(userFound)
 
-            moviesGenres.forEach(genre => {
-                userFound.moviesGenres.push(genre)
+            moviesGenres.forEach(item => {
+                userFound.moviesGenres.push({
+                    genreId: item.id,
+                    genre: item.genre
+                })
             })
 
-            seriesGenres.forEach(genre => {
-                userFound.seriesGenres.push(genre)
+            seriesGenres.forEach(item => {
+                userFound.seriesGenres.push({
+                    genreId: item.id,
+                    genre: item.genre
+                })
             })
 
             userFound.markModified('moviesGenres')

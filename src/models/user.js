@@ -19,21 +19,21 @@ const userSchema = new Schema({
         required: true 
     },
     seriesGenres: [{
-        id: {
+        genreId: {
             type: Number,
             required: true
         },
-        name: {
+        genre: {
             type: String,
             required: true
         }
     }],
     moviesGenres: [{
-        id: {
+        genreId: {
             type: Number,
             required: true
         },
-        name: {
+        genre: {
             type: String,
             required: true
         }
