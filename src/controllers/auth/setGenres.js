@@ -7,7 +7,7 @@ module.exports = (request, response) => {
     const seriesGenres = request.body.seriesGenres
 
     userModel.findOne({
-        username: userNameSearch
+        userName: userNameSearch
     }).then(userFound => {
 
         if (userFound) {
