@@ -30,6 +30,7 @@ const updateEpisode = require('./src/controllers/series/updateEpisode')
 const postComment = require('./src/controllers/forums/postComment')
 const fetchComments = require('./src/controllers/forums/fetchComments')
 const likeComment = require('./src/controllers/forums/likeComment')
+const postRelpy = require('./src/controllers/forums/postRelpy')
 
 
 app.post('/register', register)
@@ -45,6 +46,7 @@ app.post('/updateEpisode', updateEpisode)
 app.post('/postComment', postComment)
 app.post('/likeComment', likeComment)
 app.get('/fetchComments', fetchComments)
+app.post('/postReply', postRelpy)
 
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,
