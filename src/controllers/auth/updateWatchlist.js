@@ -11,24 +11,47 @@ module.exports = (request, response) => {
         userName: userName
     }).then(userFound => {
 
-        userFound.watchlist.push({
-            id: id,
-            posterPath: posterPath,
-            type: type
-        })
+        const elementExist = userFound.watchlist.find(item => item.id === id)
 
-        userFound.markModified('watchlist')
+        if (elementExist) {
 
-        userFound.save().then(() => {
-            response.status(200).json({
-                message: 'Movie/Series added successfully'
+            userFound.watchlist.splice(userFound.watchlist.indexOf(elementExist), 1)
+
+            userFound.markModified('watchlist')
+
+            userFound.save().then(() => {
+                response.status(200).json({
+                    message: 'Removed from watchlist'
+                })
+            }).catch(err => {
+                response.status(500).json({
+                    message: 'Error removing from watchlist',
+                    error: err
+                })
             })
-        }).catch(err => {
-            response.status(500).json({
-                message: 'Error adding movie/series',
-                error: err
+        
+        } else {
+
+            userFound.watchlist.push({
+                id: id,
+                posterPath: posterPath,
+                type: type
             })
-        })
+
+            userFound.markModified('watchlist')
+
+            userFound.save().then(() => {
+                response.status(200).json({
+                    message: 'Movie/Series added successfully'
+                })
+            }).catch(err => {
+                response.status(500).json({
+                    message: 'Error adding movie/series',
+                    error: err
+                })
+            })
+
+        }
 
     }).catch(err => {
         response.status(500).json({
