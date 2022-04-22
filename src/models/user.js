@@ -75,7 +75,7 @@ const userSchema = new Schema({
         },
     }],
     watchlist: [{
-        id: {
+        elementId: {
             type: String,
             required: true
         },

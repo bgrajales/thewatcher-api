@@ -11,7 +11,7 @@ module.exports = (request, response) => {
         userName: userName
     }).then(userFound => {
 
-        const elementExist = userFound.watchlist.find(item => item.id === id)
+        const elementExist = userFound.watchlist.find(item => item.elementId === id)
 
         if (elementExist) {
 
