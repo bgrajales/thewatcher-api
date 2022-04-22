@@ -21,7 +21,7 @@ module.exports = (request, response) => {
 
             const newReply = {
                 userName,
-                reply,
+                comment: reply,
                 date: new Date(),
                 likes: 0
             }
