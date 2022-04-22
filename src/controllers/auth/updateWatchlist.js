@@ -11,11 +11,17 @@ module.exports = (request, response) => {
         userName: userName
     }).then(userFound => {
 
-        const elementExist = userFound.watchlist.find(item => item.elementId === id)
+        const newElement = {
+            elementId: id,
+            posterPath: posterPath,
+            type: type
+        }
 
-        console.log(elementExist)
+        const elementExists = userFound.watchlist.find(element => element.elementId === id)
 
-        if (elementExist) {
+        console.log(elementExists)
+
+        if (elementExists) {
 
             console.log('element alerady exist')
             userFound.watchlist.splice(userFound.watchlist.indexOf(elementExist), 1)
@@ -36,11 +42,7 @@ module.exports = (request, response) => {
         } else {
             console.log('element doesnt exist')
 
-            userFound.watchlist.push({
-                elementId: id,
-                posterPath: posterPath,
-                type: type
-            })
+            userFound.watchlist.push( newElement )
 
             userFound.markModified('watchlist')
             console.log(userFound.watchlist)
