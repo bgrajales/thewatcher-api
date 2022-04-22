@@ -25,23 +25,33 @@ module.exports = (request, response) => {
                 likes: 0
             }
 
-            forumExist.replies.push(newReply)
+            forumModel.findOneAndUpdate({
+                id: commentId
+            }, {
+                $push: { 
+                    replies: {
+                        $each: [newReply],
+                        $position: 0
+                    }
+                }
+            }, {
+                new: true
+            }).then(forum => {
 
-            forumExist.markModified('replies')
-
-            console.log(forumExist)
-
-            forumExist.save().then(forum => {
                 response.status(200).json({
-                    message: 'Reply added successfully',
+                    success: true,
                     forum
                 })
+
             }).catch(error => {
+
                 response.status(500).json({
-                    message: 'Error adding reply',
+                    success: false,
                     error
                 })
+
             })
+
 
         } else {
 
