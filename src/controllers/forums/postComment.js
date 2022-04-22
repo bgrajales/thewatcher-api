@@ -19,6 +19,8 @@ module.exports = (request, response) => {
             const month = date.getMonth() + 1
             const year = date.getFullYear()
 
+            console.log(`${day}/${month}/${year}`)
+
             const newComment = {
                 userName,
                 comment,
