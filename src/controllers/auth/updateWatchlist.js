@@ -11,55 +11,17 @@ module.exports = (request, response) => {
         userName: userName
     }).then(userFound => {
 
-        const newElement = {
-            elementId: id,
-            posterPath: posterPath,
-            type: type
-        }
+        if  ( userFound ) {
 
-        const elementExists = userFound.watchlist.filter(element => element.elementId === id)
+            const alreadyExists = userFound.watchlist.find(item => item.elementId === id && item.type === type)
 
-        console.log(elementExists)
+            console.log(alreadyExists)
 
-        if (
-            elementExists.length !== 0
-        ) {
-
-            console.log('element alerady exist')
-            userFound.watchlist.splice(userFound.watchlist.indexOf(elementExist), 1)
-
-            userFound.markModified('watchlist')
-            console.log(userFound.watchlist)
-            userFound.save().then(() => {
-                response.status(200).json({
-                    message: 'Removed from watchlist'
-                })
-            }).catch(err => {
-                response.status(500).json({
-                    message: 'Error removing from watchlist',
-                    error: err
-                })
-            })
-        
         } else {
-            console.log('element doesnt exist')
-
-            userFound.watchlist.push( newElement )
-
-            userFound.markModified('watchlist')
-            console.log(userFound.watchlist)
-
-            userFound.save().then(() => {
-                response.status(200).json({
-                    message: 'Movie/Series added successfully'
-                })
-            }).catch(err => {
-                response.status(500).json({
-                    message: 'Error adding movie/series',
-                    error: err
-                })
+            response.status(500).json({
+                success: false,
+                message: 'Something went wrong'
             })
-
         }
 
     }).catch(err => {
