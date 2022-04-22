@@ -21,7 +21,9 @@ module.exports = (request, response) => {
 
         console.log(elementExists)
 
-        if (elementExists) {
+        if (
+            elementExists !== undefined || elementExists !== null
+        ) {
 
             console.log('element alerady exist')
             userFound.watchlist.splice(userFound.watchlist.indexOf(elementExist), 1)
