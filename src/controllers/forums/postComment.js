@@ -16,7 +16,7 @@ module.exports = (request, response) => {
             const newComment = {
                 userName,
                 comment,
-                date: new Date(),
+                date: new Date().toLocaleDateString(),
                 likes: 0,
                 replies: []
             }

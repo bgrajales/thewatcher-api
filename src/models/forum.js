@@ -19,7 +19,7 @@ const forumSchema = new Schema({
             required: true
         },
         date: {
-            type: Date,
+            type: String,
             required: true
         },
         likes: {
@@ -36,7 +36,7 @@ const forumSchema = new Schema({
                 required: true
             },
             date: {
-                type: Date,
+                type: String,
                 required: true
             },
             likes: {

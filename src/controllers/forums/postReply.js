@@ -22,7 +22,7 @@ module.exports = (request, response) => {
             const newReply = {
                 userName,
                 comment: reply,
-                date: new Date(),
+                date: new Date().toLocaleDateString(),
                 likes: 0
             }
 
