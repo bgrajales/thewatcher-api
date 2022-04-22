@@ -74,6 +74,20 @@ const userSchema = new Schema({
             required: true
         },
     }],
+    watchlist: [{
+        id: {
+            type: String,
+            required: true
+        },
+        posterPath: {
+            type: String,
+            required: true
+        },
+        type: {
+            type: String,
+            required: true
+        }
+    }],
     likedComments: [{
         type: String,
     }],
