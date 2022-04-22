@@ -13,6 +13,8 @@ module.exports = (request, response) => {
 
         const elementExist = userFound.watchlist.find(item => item.elementId === id)
 
+        console.log(elementExist)
+
         if (elementExist) {
 
             console.log('element alerady exist')
