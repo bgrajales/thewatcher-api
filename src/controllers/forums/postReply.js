@@ -5,13 +5,14 @@ module.exports = (request, response) => {
     const userName = request.body.userName 
     const reply = request.body.reply
     const commentId = request.body.commentId
+    const elementId = request.body.elementId
 
     console.log(
         `userName: ${userName}, reply: ${reply}, commentId: ${commentId}`
     )
 
     forumModel.findOne({
-        id: commentId
+        elementId: elementId
     }).then(forumExist => {
 
         console.log(forumExist)
@@ -26,13 +27,11 @@ module.exports = (request, response) => {
             }
 
             forumModel.findOneAndUpdate({
-                id: commentId
+                elementId: elementId,
+                'comments._id': commentId
             }, {
-                $push: { 
-                    replies: {
-                        $each: [newReply],
-                        $position: 0
-                    }
+                $push: {
+                    'comments.$.replies': newReply
                 }
             }, {
                 new: true
