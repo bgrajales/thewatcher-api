@@ -13,10 +13,16 @@ module.exports = (request, response) => {
 
         if(forumExist) {
 
+            const date = new Date()
+
+            const day = date.getDate()
+            const month = date.getMonth() + 1
+            const year = date.getFullYear()
+
             const newComment = {
                 userName,
                 comment,
-                date: new Date().toLocaleDateString(),
+                date: `${day}/${month}/${year}`,
                 likes: 0,
                 replies: []
             }
