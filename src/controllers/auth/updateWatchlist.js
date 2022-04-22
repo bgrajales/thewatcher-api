@@ -15,10 +15,11 @@ module.exports = (request, response) => {
 
         if (elementExist) {
 
+            console.log('element alerady exist')
             userFound.watchlist.splice(userFound.watchlist.indexOf(elementExist), 1)
 
             userFound.markModified('watchlist')
-
+            console.log(userFound.watchlist)
             userFound.save().then(() => {
                 response.status(200).json({
                     message: 'Removed from watchlist'
@@ -31,14 +32,16 @@ module.exports = (request, response) => {
             })
         
         } else {
+            console.log('element doesnt exist')
 
             userFound.watchlist.push({
-                id: id,
+                elementId: id,
                 posterPath: posterPath,
                 type: type
             })
 
             userFound.markModified('watchlist')
+            console.log(userFound.watchlist)
 
             userFound.save().then(() => {
                 response.status(200).json({
