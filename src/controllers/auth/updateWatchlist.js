@@ -17,12 +17,12 @@ module.exports = (request, response) => {
             type: type
         }
 
-        const elementExists = userFound.watchlist.indexOf(newElement)
+        const elementExists = userFound.watchlist.filter(element => element.elementId === id)
 
         console.log(elementExists)
 
         if (
-            elementExists !== -1
+            elementExists.length !== 0
         ) {
 
             console.log('element alerady exist')
