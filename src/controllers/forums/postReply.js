@@ -11,7 +11,7 @@ module.exports = (request, response) => {
     )
 
     forumModel.findOne({
-        _id: commentId
+        id: commentId
     }).then(forumExist => {
 
         console.log(forumExist)
