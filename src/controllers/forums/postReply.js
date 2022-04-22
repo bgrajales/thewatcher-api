@@ -6,9 +6,15 @@ module.exports = (request, response) => {
     const reply = request.body.reply
     const commentId = request.body.commentId
 
+    console.log(
+        `userName: ${userName}, reply: ${reply}, commentId: ${commentId}`
+    )
+
     forumModel.findOne({
         _id: commentId
     }).then(forumExist => {
+
+        console.log(forumExist)
 
         if(forumExist) {
 
@@ -22,6 +28,8 @@ module.exports = (request, response) => {
             forumExist.replies.push(newReply)
 
             forumExist.markModified('replies')
+
+            console.log(forumExist)
 
             forumExist.save().then(forum => {
                 response.status(200).json({
