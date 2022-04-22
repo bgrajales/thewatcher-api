@@ -19,8 +19,6 @@ module.exports = (request, response) => {
             const month = date.getMonth() + 1
             const year = date.getFullYear()
 
-            console.log(`${day}/${month}/${year}`)
-
             const newComment = {
                 userName,
                 comment,
@@ -59,13 +57,19 @@ module.exports = (request, response) => {
 
         } else {
 
+            const date = new Date()
+
+            const day = date.getDate()
+            const month = date.getMonth() + 1
+            const year = date.getFullYear()
+
             const newForum = {
                 type: type,
                 elementId: elementId,
                 comments: [{
                     userName: userName,
                     comment: comment,
-                    date: new Date(),
+                    date: `${day}/${month}/${year}`,
                     likes: 0,
                     replies: []
                 }]
