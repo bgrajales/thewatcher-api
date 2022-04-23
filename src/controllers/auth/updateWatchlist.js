@@ -36,7 +36,7 @@ module.exports = (request, response) => {
 
         } else if (action === 'remove') {
 
-            const newArray = userFound.watchlist.filter(item => item.elementId !== id)
+            const newArray = userFound.watchlist.filter(item => item.elementId.toString() !== id.toString());
 
             userFound.watchlist = newArray
 
