@@ -13,9 +13,42 @@ module.exports = (request, response) => {
 
         if  ( userFound ) {
 
-            const alreadyExists = userFound.watchlist.find(item => item.elementId === id && item.type === type)
+            // check if user watchlist already has this element
 
-            console.log(alreadyExists)
+            let watchlist = userFound.watchlist
+
+            let watchlistElement = watchlist.find(element => {
+                return element.elementId === id && element.type === type
+            })
+
+            if ( watchlistElement ) {
+                console.log('Element already on watchlist')
+                response.status(200).json({
+                    message: 'Element already in watchlist'
+                })
+
+            } else {
+                console.log('element added')
+                userFound.watchlist.push({
+                    elementId: id,
+                    posterPath: posterPath,
+                    type: type
+                })
+
+                userFound.markModified('watchlist')
+
+                userFound.save().then(() => {
+                    response.status(200).json({
+                        message: 'Element added to watchlist'
+                    })
+                }).catch(err => {
+                    response.status(500).json({
+                        message: 'Error adding element to watchlist',
+                        error: err
+                    })
+                })
+
+            }
 
         } else {
             response.status(500).json({
