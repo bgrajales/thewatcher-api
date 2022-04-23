@@ -6,55 +6,54 @@ module.exports = (request, response) => {
     const id = request.body.id
     const posterPath = request.body.posterPath
     const type = request.body.type
+    const action = request.body.action
 
     userModel.findOne({
         userName: userName
     }).then(userFound => {
 
-        if  ( userFound ) {
+        if (action === 'add') {
 
-            // check if user watchlist already has this element
-
-            let watchlist = userFound.watchlist
-
-            let watchlistElement = watchlist.find(element => {
-                return element.elementId === id && element.type === type
+            userFound.watchlist.push({
+                elementId: id,
+                posterPath: posterPath,
+                type: type
             })
 
-            if ( watchlistElement ) {
-                console.log('Element already on watchlist')
+            userFound.markModified('watchlist')
+
+            userFound.save().then(() => {
                 response.status(200).json({
-                    message: 'Element already in watchlist'
+                    message: 'Added to watchlist',
+                    watchlist: userFound.watchlist
                 })
-
-            } else {
-                console.log('element added')
-                userFound.watchlist.push({
-                    elementId: id,
-                    posterPath: posterPath,
-                    type: type
+            }).catch(err => {
+                response.status(500).json({
+                    message: 'Error adding to watchlist',
+                    error: err
                 })
-
-                userFound.markModified('watchlist')
-
-                userFound.save().then(() => {
-                    response.status(200).json({
-                        message: 'Element added to watchlist'
-                    })
-                }).catch(err => {
-                    response.status(500).json({
-                        message: 'Error adding element to watchlist',
-                        error: err
-                    })
-                })
-
-            }
-
-        } else {
-            response.status(500).json({
-                success: false,
-                message: 'Something went wrong'
             })
+
+        } else if (action === 'remove') {
+
+            const newArray = userFound.watchlist.filter(item => item.elementId !== id)
+
+            userFound.watchlist = newArray
+
+            userFound.markModified('watchlist')
+
+            userFound.save().then(() => {
+                response.status(200).json({
+                    message: 'Removed from watchlist',
+                    watchlist: userFound.watchlist
+                })
+            }).catch(err => {
+                response.status(500).json({
+                    message: 'Error removing from watchlist',
+                    error: err
+                })
+            })
+
         }
 
     }).catch(err => {
