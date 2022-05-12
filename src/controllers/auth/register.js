@@ -119,22 +119,22 @@ module.exports = (request, response) => {
             })
         } else if (validationResult.error.details[0].message.includes('userName')) {
             response.status(400).send({
-                error: 'Username is required'
+                error: 'Username does not meet requirements'
             })
         } else if (validationResult.error.details[0].message.includes('email')) {
             response.status(400).send({
-                error: 'Email is required'
+                error: 'Email is not valid'
             })
         } else if (validationResult.error.details[0].message.includes('password')) {
             response.status(400).send({
-                error: 'Password is required'
+                error: 'Password does not meet requirements'
             })
         } else {
             response.status(400).send({
                 error: 'Invalid data'
             })
         }
-        
+
     }
 
 }
