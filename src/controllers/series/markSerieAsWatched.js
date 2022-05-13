@@ -101,7 +101,7 @@ module.exports = (request, response) => {
 
             } else {
                 
-                clg('User: ', user.series)
+                console.log(first)('User: ', user.series)
 
                 user.series.splice(user.series.indexOf( el => parseInt(el.id) === parseInt(serieId) ), 1)
 
