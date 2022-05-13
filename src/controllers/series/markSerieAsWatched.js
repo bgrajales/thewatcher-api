@@ -88,11 +88,7 @@ module.exports = (request, response) => {
 
             } else {
                 
-                const index = user.series.indexOf(
-                    user.series.find(serie => serie.id === serieId)
-                )
-
-                user.series.splice(index, 1)
+                user.series.splice(user.series.indexOf( el => el.id === serieId ), 1)
 
                 user.markModified('series')
                 user.save()
