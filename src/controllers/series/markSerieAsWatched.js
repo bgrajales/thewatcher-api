@@ -69,9 +69,7 @@ module.exports = (request, response) => {
                         const episodesArr = []
 
                         for (let index = 1; index < season.episode_count; index++) {
-                            episodesArr.push({
-                                index
-                            })                           
+                            episodesArr.push(index)                           
                         }
 
                         const newSeasonDetailElement = {
@@ -101,17 +99,23 @@ module.exports = (request, response) => {
 
             } else {
                 
-                console.log('User: ', user.series)
+                // remove serie from user serie
 
-                user.series.splice(user.series.indexOf( el => parseInt(el.id) === parseInt(serieId) ), 1)
+                console.log(user.series)
 
-                console.log('User: ', user.series)
+                user.series.splice(user.series.indexOf(
+                    user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
+                ), 1)
 
                 user.markModified('series')
                 user.save()
+
+                console.log(user.series)
+
                 response.status(200).json({
-                    message: 'Serie updated'
+                    message: 'Serie removed'
                 })
+
             }
         } else {
             response.status(404).send('User not found')
