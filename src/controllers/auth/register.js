@@ -46,7 +46,7 @@ module.exports = (request, response) => {
 
                     if ( existingUser ) {
                         return response.status(400).send({
-                            error: 'User with this userName already exists'
+                            error: 'Username already taken'
                         })
                     } else {
 
@@ -108,9 +108,33 @@ module.exports = (request, response) => {
         })
 
     } else {
-        response.status(400).send({
-            error: validationResult.error.details[0].message
-        })
+
+        if (validationResult.error.details[0].message.includes('repeatPassword')) {
+            response.status(400).send({
+                error: 'Passwords do not match'
+            })
+        } else if (validationResult.error.details[0].message.includes('region')) {
+            response.status(400).send({
+                error: 'Region is required'
+            })
+        } else if (validationResult.error.details[0].message.includes('userName')) {
+            response.status(400).send({
+                error: 'Username does not meet requirements'
+            })
+        } else if (validationResult.error.details[0].message.includes('email')) {
+            response.status(400).send({
+                error: 'Email is not valid'
+            })
+        } else if (validationResult.error.details[0].message.includes('password')) {
+            response.status(400).send({
+                error: 'Password does not meet requirements'
+            })
+        } else {
+            response.status(400).send({
+                error: 'Invalid data'
+            })
+        }
+
     }
 
 }

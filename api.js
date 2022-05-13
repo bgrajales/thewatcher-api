@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+
 const mongoose = require('mongoose')
 const mongooseToJson = require('@meanie/mongoose-to-json')
 const express = require('express')
@@ -27,6 +28,7 @@ const markMovieAsWatched = require('./src/controllers/movies/markMovieAsWatched'
 const markMovieUnwatched = require('./src/controllers/movies/markMovieUnwatched')
 
 const updateEpisode = require('./src/controllers/series/updateEpisode')
+const markSerieAsWatched = require('./src/controllers/series/markSerieAsWatched')
 
 const postComment = require('./src/controllers/forums/postComment')
 const fetchComments = require('./src/controllers/forums/fetchComments')
@@ -44,6 +46,7 @@ app.post('/markMovieAsWatched', markMovieAsWatched)
 app.post('/markMovieUnwatched', markMovieUnwatched)
 
 app.post('/updateEpisode', updateEpisode)
+app.post('/markSerieAsWatched', markSerieAsWatched)
 
 app.post('/postComment', postComment)
 app.post('/likeComment', likeComment)
