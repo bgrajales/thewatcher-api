@@ -36,9 +36,7 @@ module.exports = (request, response) => {
                         const episodesArr = []
 
                         for (let index = 1; index < season.episode_count; index++) {
-                            episodesArr.push({
-                                index
-                            })                           
+                            episodesArr.push(index)                           
                         }
 
                         const newSeasonDetailElement = {
