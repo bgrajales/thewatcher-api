@@ -19,7 +19,7 @@ module.exports = (request, response) => {
                 let exists = false
 
                 user.series.forEach(serie => {
-                    if(serie.id === serieId) {
+                    if(parseInt(serie.id) === parseInt(serieId)) {
                         exists = true
                     }
                 })
@@ -75,7 +75,7 @@ module.exports = (request, response) => {
                     })
 
                     user.series[user.series.indexOf(
-                        user.series.find(serie => serie.id === serieId)
+                        user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
                     )].seasonsDetail = newSeasonsDetail
                 }
 
@@ -87,8 +87,7 @@ module.exports = (request, response) => {
                 })
 
             } else {
-                
-                user.series.splice(user.series.indexOf( el => el.id === serieId ), 1)
+                user.series.splice(user.series.indexOf( el => parseInt(el.id) === parseInt(serieId) ), 1)
 
                 user.markModified('series')
                 user.save()
