@@ -33,19 +33,21 @@ module.exports = (request, response) => {
                     const newSeasonsDetail = []
 
                     seriesSeasons.forEach(season => {
-                        const episodesArr = []
-
-                        for (let index = 1; index < season.episode_count; index++) {
-                            episodesArr.push(index)                           
+                        if( season.season_number > 0 ) {
+                            const episodesArr = []
+    
+                            for (let index = 1; index <= season.episode_count; index++) {
+                                episodesArr.push(index)                           
+                            }
+    
+                            const newSeasonDetailElement = {
+                                id: season.id,
+                                number: season.season_number,
+                                episodes: episodesArr
+                            }
+    
+                            newSeasonsDetail.push(newSeasonDetailElement)
                         }
-
-                        const newSeasonDetailElement = {
-                            id: season.id,
-                            number: season.season_number,
-                            episodes: episodesArr
-                        }
-
-                        newSeasonsDetail.push(newSeasonDetailElement)
                     })
 
                     const newSerie = {
@@ -64,19 +66,21 @@ module.exports = (request, response) => {
                     const newSeasonsDetail = []
 
                     seriesSeasons.forEach(season => {
-                        const episodesArr = []
-
-                        for (let index = 1; index < season.episode_count; index++) {
-                            episodesArr.push(index)                           
+                        if( season.season_number > 0 ) {
+                            const episodesArr = []
+    
+                            for (let index = 1; index <= season.episode_count; index++) {
+                                episodesArr.push(index)                           
+                            }
+    
+                            const newSeasonDetailElement = {
+                                id: season.id,
+                                number: season.season_number,
+                                episodes: episodesArr
+                            }
+    
+                            newSeasonsDetail.push(newSeasonDetailElement)
                         }
-
-                        const newSeasonDetailElement = {
-                            id: season.id,
-                            number: season.season_number,
-                            episodes: episodesArr
-                        }
-
-                        newSeasonsDetail.push(newSeasonDetailElement)
                     })
 
                     user.series[user.series.indexOf(
