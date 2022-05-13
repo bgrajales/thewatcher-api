@@ -101,7 +101,7 @@ module.exports = (request, response) => {
 
             } else {
                 
-                console.log(first)('User: ', user.series)
+                console.log('User: ', user.series)
 
                 user.series.splice(user.series.indexOf( el => parseInt(el.id) === parseInt(serieId) ), 1)
 
