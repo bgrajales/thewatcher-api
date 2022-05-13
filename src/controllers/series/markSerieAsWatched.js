@@ -96,7 +96,8 @@ module.exports = (request, response) => {
                 user.save()
 
                 response.status(200).json({
-                    message: 'Serie updated'
+                    message: 'Serie updated',
+                    series: user.series
                 })
 
             } else {
@@ -115,7 +116,8 @@ module.exports = (request, response) => {
                 console.log(user.series)
 
                 response.status(200).json({
-                    message: 'Serie removed'
+                    message: 'Serie removed',
+                    series: user.series
                 })
 
             }
