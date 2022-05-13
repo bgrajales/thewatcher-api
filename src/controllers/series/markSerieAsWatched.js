@@ -9,6 +9,8 @@ module.exports = (request, response) => {
     const serieTotalEpisodes = request.body.serieTotalEpisodes
     const seriesSeasons = request.body.seriesSeasons
 
+    console.log('Serie Id: ', serieId,'Action: ', action)
+
     userModel.findOne({
         userName: user
     }).then( user => {
@@ -23,6 +25,8 @@ module.exports = (request, response) => {
                         exists = true
                     }
                 })
+
+                console.log('Exists: ', exists)
 
                 if(!exists) {
 
@@ -53,6 +57,11 @@ module.exports = (request, response) => {
                         episodesWatched: serieTotalEpisodes,
                         seasonsDetail: newSeasonsDetail,
                     }
+
+                    console.log('New Serie: ', newSerie)
+
+                    user.series.push(newSerie)
+
                 } else {
                     const newSeasonsDetail = []
 
@@ -77,6 +86,10 @@ module.exports = (request, response) => {
                     user.series[user.series.indexOf(
                         user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
                     )].seasonsDetail = newSeasonsDetail
+
+                    console.log('New Serie: ', user.series[user.series.indexOf(
+                        user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
+                    )])
                 }
 
                 user.markModified('series')
@@ -87,7 +100,12 @@ module.exports = (request, response) => {
                 })
 
             } else {
+                
+                clg('User: ', user.series)
+
                 user.series.splice(user.series.indexOf( el => parseInt(el.id) === parseInt(serieId) ), 1)
+
+                console.log('User: ', user.series)
 
                 user.markModified('series')
                 user.save()
