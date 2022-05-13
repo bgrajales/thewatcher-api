@@ -7,8 +7,6 @@ module.exports = (request, response) => {
     const commentId = request.body.commentId
     const forumId = request.body.elementId
 
-    console.log(requestUserName, commentId, forumId)
-
     userModel.findOne({
         userName: requestUserName
     }).then(userExist => {

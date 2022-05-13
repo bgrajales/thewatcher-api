@@ -7,15 +7,9 @@ module.exports = (request, response) => {
     const commentId = request.body.commentId
     const elementId = request.body.elementId
 
-    console.log(
-        `userName: ${userName}, reply: ${reply}, commentId: ${commentId}`
-    )
-
     forumModel.findOne({
         elementId: elementId
     }).then(forumExist => {
-
-        console.log(forumExist)
 
         if(forumExist) {
 

@@ -32,7 +32,6 @@ const returnCredentials = (user, response) => {
 module.exports = (request, response) => {
 
     const user = request.body
-    console.log(user)
     const schema = Joi.object({
         email: Joi.string()
             .email()

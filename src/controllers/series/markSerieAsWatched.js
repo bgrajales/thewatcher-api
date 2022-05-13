@@ -9,8 +9,6 @@ module.exports = (request, response) => {
     const serieTotalEpisodes = request.body.serieTotalEpisodes
     const seriesSeasons = request.body.seriesSeasons
 
-    console.log('Serie Id: ', serieId,'Action: ', action)
-
     userModel.findOne({
         userName: user
     }).then( user => {
@@ -25,8 +23,6 @@ module.exports = (request, response) => {
                         exists = true
                     }
                 })
-
-                console.log('Exists: ', exists)
 
                 if(!exists) {
 
@@ -58,8 +54,6 @@ module.exports = (request, response) => {
                         seasonsDetail: newSeasonsDetail,
                     }
 
-                    console.log('New Serie: ', newSerie)
-
                     user.series.push(newSerie)
 
                 } else {
@@ -87,9 +81,6 @@ module.exports = (request, response) => {
                         user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
                     )].seasonsDetail = newSeasonsDetail
 
-                    console.log('New Serie: ', user.series[user.series.indexOf(
-                        user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
-                    )])
                 }
 
                 user.markModified('series')
@@ -104,7 +95,6 @@ module.exports = (request, response) => {
                 
                 // remove serie from user serie
 
-                console.log(user.series)
 
                 user.series.splice(user.series.indexOf(
                     user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
@@ -112,8 +102,6 @@ module.exports = (request, response) => {
 
                 user.markModified('series')
                 user.save()
-
-                console.log(user.series)
 
                 response.status(200).json({
                     message: 'Serie removed',
