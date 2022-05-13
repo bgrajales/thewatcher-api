@@ -87,17 +87,19 @@ module.exports = (request, response) => {
                 })
 
             } else {
-                user.series.forEach( (serie, index) => {
-                    if(serie.id === serieId) {
-                        user.series.splice(index, 1)
-                    }
+                
+                const index = user.series.indexOf(
+                    user.series.find(serie => serie.id === serieId)
+                )
+
+                user.series.splice(index, 1)
+
+                user.markModified('series')
+                user.save()
+                response.status(200).json({
+                    message: 'Serie updated'
                 })
             }
-            user.markModified('series')
-            user.save()
-            response.status(200).json({
-                message: 'Serie updated'
-            })
         } else {
             response.status(404).send('User not found')
         }
