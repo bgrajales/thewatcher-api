@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-
 const mongoose = require('mongoose')
 const mongooseToJson = require('@meanie/mongoose-to-json')
 const express = require('express')
@@ -35,6 +34,7 @@ const fetchComments = require('./src/controllers/forums/fetchComments')
 const likeComment = require('./src/controllers/forums/likeComment')
 const postReply = require('./src/controllers/forums/postReply')
 
+const searchUser = require('./src/controllers/social/searchUser')
 
 app.post('/register', register)
 app.post('/login', login)
