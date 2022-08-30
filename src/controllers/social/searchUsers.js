@@ -2,29 +2,22 @@ const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
 
-    const userToSearch = request.body.user
+    const userToSearch = request.body.username
 
-    if (!userToSearch) {
-        response.status(401).send({
-            message: 'User not found'
+    userModel.findOne({
+        userName: userToSearch
+    }).then(user => {
+
+        response.json({
+            success: true,
+            data: user.userName
             })
-    } else {
-        userModel.findOne({
-            where: {
-                userName: userToSearch
-            }
-        }).then(user => {
-            if (!user) {
-                response.status(401).send({
-                    message: 'User not found'
-                })
-            } else {
-                response.status(200).send({
-                user: user.userName
-                })
-            }
-        })
+        }).catch(err => {
 
-    }
+            response.json({
+                success: false,
+                message: 'User not found'
+                })
+        })
 
 }
