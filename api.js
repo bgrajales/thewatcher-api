@@ -53,6 +53,8 @@ app.post('/likeComment', likeComment)
 app.get('/fetchComments', fetchComments)
 app.post('/postReply', postReply)
 
+app.get('/searchUsers', searchUsers)
+
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,
     useUnifiedTopology: true
