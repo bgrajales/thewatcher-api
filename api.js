@@ -53,7 +53,7 @@ app.post('/likeComment', likeComment)
 app.get('/fetchComments', fetchComments)
 app.post('/postReply', postReply)
 
-app.get('/searchUsers', searchUsers)
+app.post('/searchUsers', searchUsers)
 
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,
