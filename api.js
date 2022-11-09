@@ -22,12 +22,16 @@ const login = require('./src/controllers/auth/login')
 const refreshToken = require('./src/controllers/auth/refreshToken')
 const setGenres = require('./src/controllers/auth/setGenres')
 const updateWatchlist = require('./src/controllers/auth/updateWatchlist')
+const deleteAccount = require('./src/controllers/auth/deleteAccount')
+const changeLenguage = require('./src/controllers/auth/changeLenguage')
+const changeNewAccount = require('./src/controllers/auth/changeNewAccount')
 
 const markMovieAsWatched = require('./src/controllers/movies/markMovieAsWatched')
 const markMovieUnwatched = require('./src/controllers/movies/markMovieUnwatched')
 
 const updateEpisode = require('./src/controllers/series/updateEpisode')
 const markSerieAsWatched = require('./src/controllers/series/markSerieAsWatched')
+const markSeasonWatched = require('./src/controllers/series/markSeasonWatched')
 
 const postComment = require('./src/controllers/forums/postComment')
 const fetchComments = require('./src/controllers/forums/fetchComments')
@@ -41,12 +45,16 @@ app.post('/login', login)
 app.post('/refreshToken', refreshToken)
 app.post('/setGenres', setGenres)
 app.post('/updateWatchlist', updateWatchlist)
+app.post('/deleteAccount', deleteAccount)
+app.post('/changeLenguage', changeLenguage)
+app.post('/changeNewAccount', changeNewAccount)
 
 app.post('/markMovieAsWatched', markMovieAsWatched)
 app.post('/markMovieUnwatched', markMovieUnwatched)
 
 app.post('/updateEpisode', updateEpisode)
 app.post('/markSerieAsWatched', markSerieAsWatched)
+app.post('/markSeasonWatched', markSeasonWatched)
 
 app.post('/postComment', postComment)
 app.post('/likeComment', likeComment)
