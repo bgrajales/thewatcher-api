@@ -4,6 +4,7 @@ const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
     const refreshTokenBody = request.body.refreshToken
+    console.log(refreshTokenBody)
     if (refreshTokenBody) {
         // Token de usuario
         jwt.verify(refreshTokenBody, process.env.JWT_KEY, (error, decoded) => {
