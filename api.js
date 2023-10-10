@@ -1,4 +1,5 @@
 require('dotenv').config()
+const updateDatabase = require('./updateScript');
 
 const mongoose = require('mongoose')
 const mongooseToJson = require('@meanie/mongoose-to-json')
@@ -39,6 +40,7 @@ const likeComment = require('./src/controllers/forums/likeComment')
 const postReply = require('./src/controllers/forums/postReply')
 
 const searchUsers = require('./src/controllers/social/searchUsers')
+const updateScript = require('./updateScript')
 
 app.post('/register', register)
 app.post('/login', login)
