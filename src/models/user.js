@@ -95,6 +95,11 @@ const userSchema = new Schema({
     likedComments: [{
         type: String,
     }],
+    settings:[{
+        leng: String,
+        verifyCode: null,
+        newAccount: Boolean
+    }],
     profilePicture: {
         type: String,
         required: false

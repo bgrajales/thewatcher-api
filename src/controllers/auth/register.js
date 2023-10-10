@@ -62,6 +62,11 @@ module.exports = (request, response) => {
                             series: [],
                             movies: [],
                             likedComments: [],
+                            settings:[{
+                                leng: "en-US",
+                                verifyCode: null,
+                                newAccount: true,
+                            }]
                         }).then(createdUser => {
 
                             const userResponse = createdUser.toJSON()
