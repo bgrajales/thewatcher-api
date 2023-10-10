@@ -1,4 +1,4 @@
-const { string } = require('joi')
+const { string, required } = require('joi')
 const { model, Schema } = require('mongoose')
 
 const userSchema = new Schema({
@@ -96,9 +96,18 @@ const userSchema = new Schema({
         type: String,
     }],
     settings:[{
-        leng: String,
-        verifyCode: null,
-        newAccount: Boolean
+        leng: {
+            type: String,
+            required: true
+        },
+        verifyCode: {
+            type: String,
+            required: true
+        },
+        newAccount: {
+            type: Boolean,
+            required: true
+        }
     }],
     profilePicture: {
         type: String,

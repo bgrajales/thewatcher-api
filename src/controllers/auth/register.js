@@ -64,7 +64,7 @@ module.exports = (request, response) => {
                             likedComments: [],
                             settings:{
                                 leng: "en-US",
-                                verifyCode: null,
+                                verifyCode: '123456789',
                                 newAccount: true,
                             }
                         }).then(createdUser => {
