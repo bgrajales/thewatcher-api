@@ -58,6 +58,10 @@ const userSchema = new Schema({
         seasonsDetail: {
             type: Array,
             required: true
+        },
+        seriesStatus: {
+            type: String,
+            required: true
         }
     }],
     movies: [{
