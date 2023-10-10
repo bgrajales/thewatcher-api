@@ -8,6 +8,7 @@ module.exports = (request, response) => {
     const action = request.body.action
     const serieTotalEpisodes = request.body.serieTotalEpisodes
     const seriesSeasons = request.body.seriesSeasons
+    const seriesStatus = request.body.seriesStatus
 
     userModel.findOne({
         userName: user
@@ -52,6 +53,7 @@ module.exports = (request, response) => {
                         episodesTotal: serieTotalEpisodes,
                         episodesWatched: serieTotalEpisodes,
                         seasonsDetail: newSeasonsDetail,
+                        seriesStatus: seriesStatus
                     }
 
                     user.series.push(newSerie)

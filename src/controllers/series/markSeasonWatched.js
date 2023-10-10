@@ -9,6 +9,7 @@ module.exports = (request, response) => {
     const seasonEpisodes = request.body.seasonEpisodes
     const posterPath = request.body.posterPath
     const serieEpisodes = request.body.serieEpisodes
+    const seriesStatus = request.body.seriesStatus
     const action = request.body.action
 
     console.log(
@@ -55,7 +56,8 @@ module.exports = (request, response) => {
                     posterPath: posterPath,
                     episodesTotal: serieEpisodes,
                     episodesWatched: serieEpisodes,
-                    seasonsDetail: [ newSeasonDetailElement ]
+                    seasonsDetail: [ newSeasonDetailElement ],
+                    seriesStatus: seriesStatus
                 })
 
             } else {

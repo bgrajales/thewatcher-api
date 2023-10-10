@@ -9,6 +9,7 @@ module.exports = (request, response) => {
     const seasonId = request.body.seasonId
     const seasonNumber = request.body.seasonNumber
     const episodeNumber = request.body.episodeNumber
+    const seriesStatus = request.body.seriesStatus
 
     userModel.findOne({
         userName: user.userName
@@ -29,7 +30,8 @@ module.exports = (request, response) => {
                             id: seasonId,
                             number: seasonNumber,
                             episodes: [ episodeNumber ]
-                        }]
+                        }],
+                        seriesStatus: seriesStatus,
                     }
 
                     user.series.push(newSerie)
