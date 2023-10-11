@@ -5,6 +5,9 @@ module.exports = (request, response) => {
     const userName = request.body.user
     const series = request.body.series
 
+    console.log(userName)
+    console.log(series)
+
     userModel.findOne({
         userName: userName
     }).then(user => {
