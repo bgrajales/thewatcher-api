@@ -102,7 +102,8 @@ const userSchema = new Schema({
         },
         verifyCode: {
             type: String,
-            required: true
+            required: false,
+            default: null
         },
         newAccount: {
             type: Boolean,
