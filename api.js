@@ -32,6 +32,8 @@ const markMovieUnwatched = require('./src/controllers/movies/markMovieUnwatched'
 const updateEpisode = require('./src/controllers/series/updateEpisode')
 const markSerieAsWatched = require('./src/controllers/series/markSerieAsWatched')
 const markSeasonWatched = require('./src/controllers/series/markSeasonWatched')
+const updateSeriesEpisode = require('./src/controllers/series/updateSeriesEpisode.js')
+
 
 const postComment = require('./src/controllers/forums/postComment')
 const fetchComments = require('./src/controllers/forums/fetchComments')
@@ -55,6 +57,7 @@ app.post('/markMovieUnwatched', markMovieUnwatched)
 app.post('/updateEpisode', updateEpisode)
 app.post('/markSerieAsWatched', markSerieAsWatched)
 app.post('/markSeasonWatched', markSeasonWatched)
+app.post('/updateSeriesEpisodes', updateSeriesEpisodes)
 
 app.post('/postComment', postComment)
 app.post('/likeComment', likeComment)
