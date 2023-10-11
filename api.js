@@ -32,7 +32,7 @@ const markMovieUnwatched = require('./src/controllers/movies/markMovieUnwatched'
 const updateEpisode = require('./src/controllers/series/updateEpisode')
 const markSerieAsWatched = require('./src/controllers/series/markSerieAsWatched')
 const markSeasonWatched = require('./src/controllers/series/markSeasonWatched')
-const updateSeriesEpisode = require('./src/controllers/series/updateSeriesEpisodes.js')
+const updateSeriesEpisodes = require('./src/controllers/series/updateSeriesEpisodes.js')
 
 
 const postComment = require('./src/controllers/forums/postComment')
