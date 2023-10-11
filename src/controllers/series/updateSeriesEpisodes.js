@@ -2,11 +2,11 @@ const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
 
-    const user = request.body.user
+    const userName = request.body.user
     const series = request.body.series
 
     userModel.findOne({
-        userName: user.userName
+        userName: userName
     }).then(user => {
 
         if (user) {
