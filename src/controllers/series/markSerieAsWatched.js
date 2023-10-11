@@ -83,6 +83,9 @@ module.exports = (request, response) => {
                         user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
                     )].seasonsDetail = newSeasonsDetail
 
+                    user.series[user.series.indexOf(
+                        user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
+                    )].episodesWatched = serieTotalEpisodes
                 }
 
                 user.markModified('series')
