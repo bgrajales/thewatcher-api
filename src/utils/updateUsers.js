@@ -5,13 +5,9 @@ module.exports = async function updateUsers() {
 
     const users = await userModel.find({"settings": {$type: "array"}});
 
-    console.log(users)
-
     for (const user of users) {
-        console.log(user.settings)
         // Verifica si "settings" es un array y tiene los campos esperados
        
-            console.log("in")
           // Mapea los valores existentes al nuevo objeto "settings"
           const newSettings = {
             leng: "en-US", // o user.settings.find(item => item.leng).leng si "leng" no está siempre en la primera posición
@@ -26,6 +22,5 @@ module.exports = async function updateUsers() {
         
       }
 
-      console.log('Migración completada');
 
 }
