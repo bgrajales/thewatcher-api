@@ -66,10 +66,13 @@ app.post('/postReply', postReply)
 
 app.post('/searchUsers', searchUsers)
 
+//const updateUsers = require('./src/utils/updateUsers.js')
+
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
+    //updateUsers()
     app.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}`)
     })

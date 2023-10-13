@@ -95,7 +95,7 @@ const userSchema = new Schema({
     likedComments: [{
         type: String,
     }],
-    settings:[{
+    settings:{
         leng: {
             type: String,
             required: true
@@ -110,7 +110,7 @@ const userSchema = new Schema({
             required: false,
             default: false
         }
-    }],
+    },
     profilePicture: {
         type: String,
         required: false
