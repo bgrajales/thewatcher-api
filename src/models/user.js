@@ -62,6 +62,14 @@ const userSchema = new Schema({
         seriesStatus: {
             type: String,
             required: true
+        },
+        dateAdded: {
+            type: Date,
+            required: true
+        },
+        dateModified: {
+            type: Date,
+            required: true
         }
     }],
     movies: [{
@@ -75,6 +83,10 @@ const userSchema = new Schema({
         },
         runTime: {
             type: Number,
+            required: true
+        },
+        dateAdded: {
+            type: Date,
             required: true
         },
     }],
@@ -109,6 +121,10 @@ const userSchema = new Schema({
             type: Boolean,
             required: false,
             default: false
+        },
+        dateCreated: {
+            type: Date,
+            required: false,
         }
     },
     profilePicture: {

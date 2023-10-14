@@ -99,8 +99,7 @@ module.exports = (request, response) => {
             } else {
                 
                 // remove serie from user serie
-
-
+                
                 user.series.splice(user.series.indexOf(
                     user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
                 ), 1)

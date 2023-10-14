@@ -66,6 +66,7 @@ module.exports = (request, response) => {
                                 leng: "en-US",
                                 verifyCode: '123456789',
                                 newAccount: true,
+                                dateCreated: Date.now(),
                             }
                         }).then(createdUser => {
 

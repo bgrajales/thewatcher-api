@@ -11,17 +11,6 @@ module.exports = (request, response) => {
     const serieEpisodes = request.body.serieEpisodes
     const seriesStatus = request.body.seriesStatus
     const action = request.body.action
-
-    console.log(
-        'user: ' + user +
-        '\nserieId: ' + serieId +
-        '\nseasonId: ' + seasonId +
-        '\nseasonNumber: ' + seasonNumber +
-        '\nseasonEpisodes: ' + seasonEpisodes +
-        '\nposterPath: ' + posterPath +
-        '\nserieEpisodes: ' + serieEpisodes +
-        '\naction: ' + action
-    )
     
     userModel.findOne({
         userName: user
@@ -57,7 +46,9 @@ module.exports = (request, response) => {
                     episodesTotal: serieEpisodes,
                     episodesWatched: serieEpisodes,
                     seasonsDetail: [ newSeasonDetailElement ],
-                    seriesStatus: seriesStatus
+                    seriesStatus: seriesStatus,
+                    dateAdded: Date.now(),
+                    dateModified: Date.now()
                 })
 
             } else {
@@ -106,7 +97,8 @@ module.exports = (request, response) => {
 
                 }
                 
-                
+                user.series.dateModified = Date.now()
+
             }
     
         } else {
@@ -159,6 +151,14 @@ module.exports = (request, response) => {
             })
     
             user.series[seriesIndex].episodesWatched = episodesWatchNumber
+
+            user.series.dateModified = Date.now()
+
+            if (episodesWatchNumber == 0) {
+                user.series.splice(user.series.indexOf(
+                    user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
+                ), 1)
+            }
         }
 
         const notCompletedSeries = user.series.filter(serie => serie.episodesWatched !== serie.episodesTotal)
