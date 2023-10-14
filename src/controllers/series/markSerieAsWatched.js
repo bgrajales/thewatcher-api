@@ -58,7 +58,7 @@ module.exports = (request, response) => {
                         dateModified: Date.now(),
                     }
 
-                    user.series.push(newSerie)
+                    user.series.unshift(newSerie)
 
                 } else {
                     const newSeasonsDetail = []

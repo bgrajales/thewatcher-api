@@ -9,7 +9,7 @@ module.exports = (request, response) => {
         userName: user.userName
     }).then(user => {
 
-        user.movies.push({
+        user.movies.unshift({
             id: movie.id,
             posterPath: movie.posterPath,
             runTime: movie.runTime,

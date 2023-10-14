@@ -82,6 +82,17 @@ module.exports = (request, response) => {
 
             }
 
+            const seriesIndexToMove = user.series.findIndex(serie => parseInt(serie.id) === parseInt(serieId));
+
+            // Si la serie fue encontrada
+            if (seriesIndexToMove !== -1) {
+                // Remueve la serie del array
+                const [modifiedSeries] = user.series.splice(seriesIndex, 1);
+
+                // Inserta la serie al inicio del array
+                user.series.unshift(modifiedSeries);
+            }
+
             user.markModified('series')
 
             user.save()
