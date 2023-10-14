@@ -53,7 +53,9 @@ module.exports = (request, response) => {
                         episodesTotal: serieTotalEpisodes,
                         episodesWatched: serieTotalEpisodes,
                         seasonsDetail: newSeasonsDetail,
-                        seriesStatus: seriesStatus
+                        seriesStatus: seriesStatus,
+                        dateAdded: Date.now(),
+                        dateModified: Date.now(),
                     }
 
                     user.series.push(newSerie)
@@ -86,6 +88,11 @@ module.exports = (request, response) => {
                     user.series[user.series.indexOf(
                         user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
                     )].episodesWatched = serieTotalEpisodes
+
+                    user.series[user.series.indexOf(
+                        user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
+                    )].dateModified = Date.now()
+
                 }
 
                 user.markModified('series')
@@ -99,7 +106,7 @@ module.exports = (request, response) => {
             } else {
                 
                 // remove serie from user serie
-                
+
                 user.series.splice(user.series.indexOf(
                     user.series.find(serie => parseInt(serie.id) === parseInt(serieId))
                 ), 1)

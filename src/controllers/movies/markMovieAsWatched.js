@@ -12,7 +12,8 @@ module.exports = (request, response) => {
         user.movies.push({
             id: movie.id,
             posterPath: movie.posterPath,
-            runTime: movie.runTime
+            runTime: movie.runTime,
+            dateAdded: Date.now()
         })
 
         user.markModified('movies')

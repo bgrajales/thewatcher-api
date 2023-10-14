@@ -3,21 +3,36 @@ const { userModel } = require('../models/user')
 module.exports = async function updateUsers() {  
     // Actualiza todos los documentos de usuarios que tienen "settings" como array
 
-    const users = await userModel.find({"settings": {$type: "array"}});
+    const users = await userModel.find();
 
     for (const user of users) {
-        // Verifica si "settings" es un array y tiene los campos esperados
        
-          // Mapea los valores existentes al nuevo objeto "settings"
-          const newSettings = {
-            leng: "en-US", // o user.settings.find(item => item.leng).leng si "leng" no está siempre en la primera posición
-            verifyCode: null,
-            newAccount: false,
-            // ... otros campos necesarios
-          };
-    
+          if (!user.settings.leng) {
+            console.log("no tiene settings")
+            user.settings = {
+              leng: "en-US",
+              verifyCode: null,
+              newAccount: true,
+              dateCreated: Date.now()
+            }
+          } else {
+            user.settings.dateCreated = Date.now()
+          }
+          
+          console.log(user.email)
           // Actualiza el documento del usuario con el nuevo objeto "settings"
-          user.settings = newSettings;
+          user.dateCreated ? delete user.dateCreated : null
+
+          
+          user.series.forEach(serie => {
+            serie.dateAdded = Date.now();
+            serie.dateModified = Date.now();
+          });
+
+          user.movies.forEach(movie => {
+            movie.dateAdded = Date.now();
+          });
+
           await user.save();
         
       }

@@ -32,6 +32,8 @@ module.exports = (request, response) => {
                             episodes: [ episodeNumber ]
                         }],
                         seriesStatus: seriesStatus,
+                        dateAdded: Date.now(),
+                        dateModified: Date.now()
                     }
 
                     user.series.push(newSerie)
@@ -52,6 +54,8 @@ module.exports = (request, response) => {
 
                     user.series[seriesIndex].episodesWatched += 1
 
+                    user.series[seriesIndex].dateModified = Date.now()
+
                 } else {
 
                     const episodesIndex = user.series[seriesIndex].seasonsDetail[seasonsDetailIndex].episodes.findIndex(episode => parseInt(episode) === parseInt(episodeNumber))
@@ -71,6 +75,8 @@ module.exports = (request, response) => {
                         }
 
                     }
+
+                    user.series[seriesIndex].dateModified = Date.now()
             
                 }
 
