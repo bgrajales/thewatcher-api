@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const { userModel } = require('../../models/user')
-const { sendVerificationEmail } = require('../controllers/auth/emailController');
+const { sendVerificationEmail } = require('./emailController');
 
 module.exports = (request, response) => {
 
