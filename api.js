@@ -27,6 +27,7 @@ const changeLenguage = require('./src/controllers/auth/changeLenguage')
 const changeNewAccount = require('./src/controllers/auth/changeNewAccount')
 const verifyEmail = require('./src/controllers/auth/verifyEmail')
 const resetPassword = require('./src/controllers/auth/resetPassword')
+const changePassword = require('./src/controllers/auth/changePassword')
 
 const markMovieAsWatched = require('./src/controllers/movies/markMovieAsWatched')
 const markMovieUnwatched = require('./src/controllers/movies/markMovieUnwatched')
@@ -54,6 +55,7 @@ app.post('/changeLenguage', changeLenguage)
 app.post('/changeNewAccount', changeNewAccount)
 app.post('/verifyEmail', verifyEmail)
 app.post('/resetPassword', resetPassword)
+app.post('/changePassword', changePassword)
 
 
 app.post('/markMovieAsWatched', markMovieAsWatched)
