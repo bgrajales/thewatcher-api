@@ -8,6 +8,7 @@ const { sendVerificationEmail } = require('./emailController');
 module.exports = async (request, response) => {
 
     const email = request.body.email
+    console.log(email)
 
     const user = userModel.findOne({email: email})
 
