@@ -12,7 +12,7 @@ module.exports = (request, response) => {
         if (user) {
             if (user.settings.verifyCode == verifyCode) {
                 console.log("Email confirmado")
-                user.verifyCode = "verified"
+                user.settings.verifyCode = "verified"
 
                 user.markModified('settings')
                 user.save()
