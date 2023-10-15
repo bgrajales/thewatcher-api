@@ -12,10 +12,15 @@ module.exports = (request, response) => {
         if (user) {
             if (user.settings.verifyCode == verifyCode) {
                 console.log("Email confirmado")
-                user.settings.verifyCode = "verified"
+                user.settings = {
+                    ...user.settings,
+                    verifyCode: "verified"
+                }
 
                 user.markModified('settings')
-                user.save()
+                user.save().catch(error => {
+                    console.error('Error saving user:', error);
+                });
     
                 return response.status(200).send({ message: 'Email Verified' })
             } else {
