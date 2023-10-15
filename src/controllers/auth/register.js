@@ -100,7 +100,7 @@ module.exports = (request, response) => {
                                 refreshToken
                             })
 
-                            const emailSent = await sendVerificationEmail(user);
+                            const emailSent = await sendVerificationEmail(userResponse);
                             if(emailSent) {
                                 console.log('Email sent successfully');
                             } else {
