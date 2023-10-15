@@ -26,6 +26,7 @@ const deleteAccount = require('./src/controllers/auth/deleteAccount')
 const changeLenguage = require('./src/controllers/auth/changeLenguage')
 const changeNewAccount = require('./src/controllers/auth/changeNewAccount')
 const verifyEmail = require('./src/controllers/auth/verifyEmail')
+const resetPassword = require('./src/controllers/auth/resetPassword')
 
 const markMovieAsWatched = require('./src/controllers/movies/markMovieAsWatched')
 const markMovieUnwatched = require('./src/controllers/movies/markMovieUnwatched')
@@ -52,6 +53,8 @@ app.post('/deleteAccount', deleteAccount)
 app.post('/changeLenguage', changeLenguage)
 app.post('/changeNewAccount', changeNewAccount)
 app.post('/verifyEmail', verifyEmail)
+app.post('/resetPassword', resetPassword)
+
 
 app.post('/markMovieAsWatched', markMovieAsWatched)
 app.post('/markMovieUnwatched', markMovieUnwatched)
@@ -68,13 +71,13 @@ app.post('/postReply', postReply)
 
 app.post('/searchUsers', searchUsers)
 
-//const updateUsers = require('./src/utils/updateUsers.js')
+const updateUsers = require('./src/utils/updateUsers.js')
 
 mongoose.connect(getDbConnectionString(), {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
-    //updateUsers()
+    updateUsers()
     app.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}`)
     })

@@ -21,17 +21,19 @@ module.exports = async function updateUsers() {
             verifyCode: verifyCodeGenerated
           }
         
-          const emailSent = await sendVerificationEmail(user);
+          const emailSent = await sendVerificationEmail(user, "verifEmail", {
+            verifyCode: user.settings.verifyCode
+          });
+
           if(emailSent) {
-            console.log('Email sent successfully');
+            console.log('Email sent successfully to ', user.userName);
           } else {
-            console.log('Failed to send email');
+            console.log('Failed to send emailto ', user.userName);
           }
 
           user.markModified('settings')
           await user.save();
-        
+         
       //}
-
-        
+  
 }
