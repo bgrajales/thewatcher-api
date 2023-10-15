@@ -78,6 +78,7 @@ mongoose.connect(getDbConnectionString(), {
     useUnifiedTopology: true
 }).then(() => {
     //updateUsers()
+
     app.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}`)
     })

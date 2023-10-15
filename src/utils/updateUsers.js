@@ -21,7 +21,7 @@ module.exports = async function updateUsers() {
             verifyCode: verifyCodeGenerated
           }
         
-          const emailSent = await sendVerificationEmail(user, "verifEmail", {
+          const emailSent = await sendVerificationEmail(user.email, "verifEmail", {
             verifyCode: user.settings.verifyCode
           });
 

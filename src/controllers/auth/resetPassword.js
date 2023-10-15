@@ -8,9 +8,8 @@ const { sendVerificationEmail } = require('./emailController');
 module.exports = async (request, response) => {
 
     const email = request.body.email
-    console.log(email)
 
-    const user = userModel.findOne({email: email})
+    const user = await userModel.findOne({ email: email });
 
     if (user) {
 
@@ -20,15 +19,16 @@ module.exports = async (request, response) => {
             var rnd = Math.floor(Math.random() * list.length);
             passwordGenerated = passwordGenerated + list.charAt(rnd);
         }
-        console.log(passwordGenerated)
         user.password = bcrypt.hashSync(passwordGenerated, 10)
 
-        try {
-            await sendVerificationEmail(user, "passwordEmail", {
-                newPassword: passwordGenerated
-            });
-        } catch (error) {
-            console.log(error)
+        const emailSent = await sendVerificationEmail(user.email, "passwordEmail", {
+            newPassword: passwordGenerated
+        });
+
+        if(emailSent) {
+        console.log('Email sent successfully to ', user.userName);
+        } else {
+        console.log('Failed to send emailto ', user.userName);
         }
 
     } else {

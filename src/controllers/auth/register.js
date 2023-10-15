@@ -99,7 +99,7 @@ module.exports = (request, response) => {
                                 refreshToken
                             })
 
-                            const emailSent = await sendVerificationEmail(userResponse, "verifEmail", {
+                            const emailSent = await sendVerificationEmail(userResponse.email, "verifEmail", {
                                 verifyCode: user.settings.verifyCode
                             });
                             if(emailSent) {
