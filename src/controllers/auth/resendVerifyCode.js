@@ -1,5 +1,5 @@
-const { userModel } = require('../models/user')
-const { sendVerificationEmail } = require('../controllers/auth/emailController');  // Asegúrate de ajustar la ruta del archivo
+const { userModel } = require('../../models/user')
+const { sendVerificationEmail } = require('./emailController');  // Asegúrate de ajustar la ruta del archivo
 
 module.exports = async function updateUsers(request, response) {  
 
