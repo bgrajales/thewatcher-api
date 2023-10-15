@@ -20,7 +20,7 @@ module.exports = (request, response) => {
     const validationResult = schema.validate({
         newPassword: newPassword
     })
-    
+
     console.log(validationResult)
 
     if (!validationResult.error) {
@@ -30,14 +30,14 @@ module.exports = (request, response) => {
         }).then(existingUser => {
 
             if (existingUser) {
-                const match = bcrypt.compareSync(user.password, currentPassword)
+                const match = bcrypt.compareSync(existingUser.password, currentPassword)
                 console.log(match)
                 if (match) {
 
-                    user.password = bcrypt.hashSync(newPassword, 10)
+                    existingUser.password = bcrypt.hashSync(newPassword, 10)
 
-                    user.markModified("password")
-                    user.save()
+                    existingUser.markModified("password")
+                    existingUser.save()
 
                     response.status(200).send({
                         message: 'Password updated'
