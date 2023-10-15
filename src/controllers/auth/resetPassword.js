@@ -37,6 +37,9 @@ module.exports = async (request, response) => {
             })
         }
 
+        user.markModified('password')
+        user.save()
+
     } else {
         response.status(400).send({
             error: "No user found"
