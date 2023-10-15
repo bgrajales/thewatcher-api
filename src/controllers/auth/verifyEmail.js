@@ -10,7 +10,7 @@ module.exports = (request, response) => {
     }).then(user => {
 
         if (user) {
-            if (user.verifyCode == verifyCode) {
+            if (user.settings.verifyCode == verifyCode) {
                 console.log("Email confirmado")
                 user.verifyCode = "verified"
 
