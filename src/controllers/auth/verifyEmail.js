@@ -11,7 +11,6 @@ module.exports = (request, response) => {
 
         if (user) {
             if (user.settings.verifyCode == verifyCode) {
-                console.log("Email confirmado")
                 user.settings = {
                     ...user.settings,
                     verifyCode: "verified"

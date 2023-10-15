@@ -1,41 +1,37 @@
 const { userModel } = require('../models/user')
+const { sendVerificationEmail } = require('../controllers/auth/emailController');  // Asegúrate de ajustar la ruta del archivo
 
 module.exports = async function updateUsers() {  
-    // Actualiza todos los documentos de usuarios que tienen "settings" como array
 
-    const users = await userModel.find();
+    const user = await userModel.findOne({
+      userName: "bgrajales97"
+    });
 
-    for (const user of users) {
-       
-          if (!user.settings.leng) {
-            console.log("no tiene settings")
-            user.settings = {
-              leng: "en-US",
-              verifyCode: null,
-              newAccount: true,
-              dateCreated: Date.now()
-            }
-          } else {
-            user.settings.dateCreated = Date.now()
+    //for (const user of users) {
+
+          const list = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+          var verifyCodeGenerated = "";
+          for(var i = 0; i < 6; i++) {
+              var rnd = Math.floor(Math.random() * list.length);
+              verifyCodeGenerated = verifyCodeGenerated + list.charAt(rnd);
           }
-          
-          console.log(user.email)
-          // Actualiza el documento del usuario con el nuevo objeto "settings"
-          user.dateCreated ? delete user.dateCreated : null
 
-          
-          user.series.forEach(serie => {
-            serie.dateAdded = Date.now();
-            serie.dateModified = Date.now();
-          });
+          user.settings = {
+            ...user.settings,
+            verifyCode: verifyCodeGenerated
+          }
+        
+          const emailSent = await sendVerificationEmail(user);
+          if(emailSent) {
+            console.log('Email sent successfully');
+          } else {
+            console.log('Failed to send email');
+          }
 
-          user.movies.forEach(movie => {
-            movie.dateAdded = Date.now();
-          });
-
+          user.markModified('settings')
           await user.save();
         
-      }
+      //}
 
-
+        
 }

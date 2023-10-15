@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const { userModel } = require('../../models/user')
+const { sendVerificationEmail } = require('../controllers/auth/emailController');
 
 module.exports = (request, response) => {
 
@@ -75,7 +76,7 @@ module.exports = (request, response) => {
                                 newAccount: true,
                                 dateCreated: Date.now(),
                             }
-                        }).then(createdUser => {
+                        }).then(async createdUser => {
 
                             const userResponse = createdUser.toJSON()
 
@@ -98,6 +99,13 @@ module.exports = (request, response) => {
                                 token,
                                 refreshToken
                             })
+
+                            const emailSent = await sendVerificationEmail(user);
+                            if(emailSent) {
+                                console.log('Email sent successfully');
+                            } else {
+                                console.log('Failed to send email');
+                            }
 
                         }).catch(err => {
                             response.status(500).send({
