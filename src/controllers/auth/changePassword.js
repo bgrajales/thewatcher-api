@@ -30,8 +30,10 @@ module.exports = (request, response) => {
         }).then(existingUser => {
 
             if (existingUser) {
-                const match = bcrypt.compareSync(existingUser.password, currentPassword)
+
+                const match = bcrypt.compareSync(currentPassword, existingUser.password)
                 console.log(match)
+
                 if (match) {
 
                     existingUser.password = bcrypt.hashSync(newPassword, 10)
