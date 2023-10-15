@@ -52,6 +52,13 @@ module.exports = (request, response) => {
 
                         user.password = bcrypt.hashSync(user.password, 10)
 
+                        const list = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+                        var verifyCodeGenerated = "";
+                        for(var i = 0; i < 6; i++) {
+                            var rnd = Math.floor(Math.random() * list.length);
+                            verifyCodeGenerated = verifyCodeGenerated + list.charAt(rnd);
+                        }
+
                         userModel.create({
                             userName: user.userName,
                             email: user.email,
@@ -64,7 +71,7 @@ module.exports = (request, response) => {
                             likedComments: [],
                             settings:{
                                 leng: "en-US",
-                                verifyCode: '123456789',
+                                verifyCode: verifyCodeGenerated,
                                 newAccount: true,
                                 dateCreated: Date.now(),
                             }
