@@ -3,7 +3,7 @@ const { userModel } = require('../../models/user')
 module.exports = (request, response) => {
 
     const verifyCode = request.body.verifyCode
-    const username = reques.body.username
+    const username = request.body.username
     
     userModel.findOne({
         userName: username
