@@ -26,16 +26,17 @@ const handlebarOptions = {
 // use a template file with nodemailer
 transporter.use('compile', hbs(handlebarOptions));
 
-async function sendVerificationEmail(user) {
+async function sendVerificationEmail(email, typeOfEmail, context) {
+
+  const subject = typeOfEmail == "verifEmail" ? context.verifyCode : context.newPassword
+
   try {
     const info = await transporter.sendMail({
       from: 'appthewatcher@gmail.com', // sender address
-      template: "verifEmail",
-      to: user.email, // list of receivers
-      subject: 'The Watcher App | Verification Code', // Subject
-      context: {
-        verifyCode: user.settings.verifyCode,
-      }
+      template: typeOfEmail,
+      to: email, // list of receivers
+      subject: 'The Watcher App | Verification Code | '+ subject, // Subject
+      context: context
     });
     return true;
   } catch (error) { 
