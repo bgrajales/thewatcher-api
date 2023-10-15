@@ -17,7 +17,10 @@ module.exports = (request, response) => {
             .required(),
     })
 
-    const validationResult = schema.validate(newPassword)
+    const validationResult = schema.validate({
+        newPassword: newPassword
+    })
+    
     console.log(validationResult)
 
     if (!validationResult.error) {
