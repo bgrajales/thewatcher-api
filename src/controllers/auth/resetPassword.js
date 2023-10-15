@@ -20,17 +20,15 @@ module.exports = async (request, response) => {
             var rnd = Math.floor(Math.random() * list.length);
             passwordGenerated = passwordGenerated + list.charAt(rnd);
         }
-
+        console.log(passwordGenerated)
         user.password = bcrypt.hashSync(passwordGenerated, 10)
 
-        const emailSent = await sendVerificationEmail(user, "passwordEmail", {
-            newPassword: passwordGenerated
-        });
-
-        if(emailSent) {
-            console.log('Email sent successfully');
-        } else {
-            console.log('Failed to send email');
+        try {
+            await sendVerificationEmail(user, "passwordEmail", {
+                newPassword: passwordGenerated
+            });
+        } catch (error) {
+            console.log(error)
         }
 
     } else {
