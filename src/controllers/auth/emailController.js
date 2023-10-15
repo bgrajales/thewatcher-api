@@ -27,12 +27,15 @@ const handlebarOptions = {
 transporter.use('compile', hbs(handlebarOptions));
 
 async function sendVerificationEmail(email, typeOfEmail, context) {
+
+  const subject = typeOfEmail == "verifEmail" ? context.verifyCode : context.newPassword
+
   try {
     const info = await transporter.sendMail({
       from: 'appthewatcher@gmail.com', // sender address
       template: typeOfEmail,
       to: email, // list of receivers
-      subject: 'The Watcher App | Verification Code', // Subject
+      subject: 'The Watcher App | Verification Code | '+ subject, // Subject
       context: context
     });
     return true;

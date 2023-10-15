@@ -26,9 +26,15 @@ module.exports = async (request, response) => {
         });
 
         if(emailSent) {
-        console.log('Email sent successfully to ', user.userName);
+            console.log('Email sent successfully to ', user.userName);
+            response.status(200).send({
+                error: "Password changed, check email"
+            })
         } else {
-        console.log('Failed to send emailto ', user.userName);
+            console.log('Failed to send emailto ', user.userName);
+            response.status(400).send({
+                error: "An error ocurred, please try again"
+            })
         }
 
     } else {
