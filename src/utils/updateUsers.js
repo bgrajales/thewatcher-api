@@ -1,9 +1,10 @@
 const { userModel } = require('../models/user')
 const { sendVerificationEmail } = require('../controllers/auth/emailController');  // Asegúrate de ajustar la ruta del archivo
+const sgMail = require('@sendgrid/mail')
 
 module.exports = async function updateUsers() {  
 
-    const user = await userModel.findOne({
+    /* const user = await userModel.findOne({
       userName: "bgrajales97"
     });
 
@@ -34,6 +35,6 @@ module.exports = async function updateUsers() {
           user.markModified('settings')
           await user.save();
          
-      //}
+      //} */
   
 }

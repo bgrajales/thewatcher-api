@@ -1,50 +1,40 @@
 // Archivo: emailController.js
-
-const nodemailer = require("nodemailer");
-const hbs = require('nodemailer-express-handlebars');
-const path = require('path');
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  service: 'gmail',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD
-  }
-});
-
-// point to the template folder
-const handlebarOptions = {
-  viewEngine: {
-      partialsDir: path.resolve('./src/utils/'),
-      defaultLayout: false,
-  },
-  viewPath: path.resolve('./src/utils/'),
-};
-
-// use a template file with nodemailer
-transporter.use('compile', hbs(handlebarOptions));
+const sgMail = require('@sendgrid/mail')
 
 async function sendVerificationEmail(email, typeOfEmail, context) {
 
-  const subject = typeOfEmail == "verifEmail" 
-    ? 'Verification Code | ' + context.verifyCode 
-    : 'Reset Password | ' + context.newPassword
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  
+  let templateId
 
-  try {
-    const info = await transporter.sendMail({
-      from: 'appthewatcher@gmail.com', // sender address
-      template: typeOfEmail,
-      to: email, // list of receivers
-      subject: 'The Watcher App | '+ subject, // Subject
-      context: context
-    });
-    return true;
-  } catch (error) { 
-    return false;
+  switch (typeOfEmail) {
+    case "verifEmail":
+      templateId = 'd-5c5703a74fd640b0a6357f9cd9386499'
+      break;
+    case "passwordEmail":
+      templateId = 'd-acecf48d6cc94a39a47640e6a8e23e2b'
+      break;
+    default:
+      break;
   }
+  
+  console.log(templateId, email, context)
+
+  const msg = {
+    to: email,
+    from: 'support@thewatcherapp.com',
+    fromname: 'The Watcher App',
+    template_id: templateId,
+    dynamic_template_data: context
+  }
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log('Email sent')
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 }
 
 module.exports = {
