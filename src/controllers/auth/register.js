@@ -28,7 +28,6 @@ module.exports = (request, response) => {
 
     const validationResult = schema.validate(user)
 
-
     if (!validationResult.error) {
 
         userModel.findOne({ 
@@ -100,7 +99,9 @@ module.exports = (request, response) => {
                                 refreshToken
                             })
 
-                            const emailSent = await sendVerificationEmail(userResponse);
+                            const emailSent = await sendVerificationEmail(userResponse.email, "verifEmail", {
+                                verifyCode: user.settings.verifyCode
+                            });
                             if(emailSent) {
                                 console.log('Email sent successfully');
                             } else {
