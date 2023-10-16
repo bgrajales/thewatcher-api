@@ -93,12 +93,6 @@ module.exports = (request, response) => {
                                 type: 'REFRESH'
                             }, process.env.JWT_KEY,{ expiresIn: '30d' })
 
-                            response.status(200).send({
-                                user: userResponse,
-                                token,
-                                refreshToken
-                            })
-
                             const emailSent = await sendVerificationEmail(userResponse.email, "verifEmail", {
                                 verifyCode: user.settings.verifyCode
                             });
@@ -107,6 +101,12 @@ module.exports = (request, response) => {
                             } else {
                                 console.log('Failed to send email');
                             }
+
+                            response.status(200).send({
+                                user: userResponse,
+                                token,
+                                refreshToken
+                            })
 
                         }).catch(err => {
                             response.status(500).send({
