@@ -94,7 +94,7 @@ module.exports = (request, response) => {
                             }, process.env.JWT_KEY,{ expiresIn: '30d' })
 
                             const emailSent = await sendVerificationEmail(userResponse.email, "verifEmail", {
-                                verifyCode: user.settings.verifyCode
+                                verifyCode: createdUser.settings.verifyCode
                             });
                             if(emailSent) {
                                 console.log('Email sent successfully');
