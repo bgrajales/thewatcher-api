@@ -27,13 +27,15 @@ async function sendVerificationEmail(email, typeOfEmail, context) {
     template_id: templateId,
     dynamic_template_data: context
   }
-  sgMail
+  await sgMail
     .send(msg)
     .then(() => {
       console.log('Email sent')
+      return true
     })
     .catch((error) => {
       console.error(error)
+      return false
     })
 }
 
