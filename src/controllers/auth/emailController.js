@@ -1,7 +1,7 @@
 // Archivo: emailController.js
 const sgMail = require('@sendgrid/mail')
 
-async function sendVerificationEmail(email, typeOfEmail, context) {
+async function sendVerificationEmail(email, typeOfEmail, context){
 
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
   
@@ -27,16 +27,16 @@ async function sendVerificationEmail(email, typeOfEmail, context) {
     template_id: templateId,
     dynamic_template_data: context
   }
-  await sgMail
-    .send(msg)
-    .then(() => {
-      console.log('Email sent')
-      return true
-    })
-    .catch((error) => {
-      console.error(error)
-      return false
-    })
+
+  try {
+    await sgMail.send(msg);
+    console.log('Email sent');
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+
 }
 
 module.exports = {

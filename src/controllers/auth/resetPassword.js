@@ -1,9 +1,6 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const Joi = require('joi')
 const { userModel } = require('../../models/user')
 const { sendVerificationEmail } = require('./emailController');
-
 
 module.exports = async (request, response) => {
 
@@ -25,6 +22,8 @@ module.exports = async (request, response) => {
             newPassword: passwordGenerated
         });
 
+        console.log(emailSent)
+        
         if(emailSent) {
             console.log('Email sent successfully to ', user.userName);
             response.status(200).send({

@@ -4,6 +4,7 @@ const sgMail = require('@sendgrid/mail')
 
 module.exports = async function updateUsers() {  
 
+  
     /* const user = await userModel.findOne({
       userName: "bgrajales97"
     });
