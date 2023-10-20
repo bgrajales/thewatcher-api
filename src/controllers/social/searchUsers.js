@@ -8,9 +8,13 @@ module.exports = (request, response) => {
         userName: userToSearch
     }).then(user => {
 
+        const responseUser = user.toJSON()
+
+        delete responseUser.password
+
         response.json({
             success: true,
-            data: user.userName
+            data: responseUser
             })
         }).catch(err => {
 
