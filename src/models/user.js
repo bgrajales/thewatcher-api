@@ -127,6 +127,38 @@ const userSchema = new Schema({
             required: false,
         }
     },
+    social: {
+        notifications: [{
+            type:{
+                type: String,
+                required: true
+            },
+            title:{
+                type: String,
+                required: true
+            },
+            text:{
+                type: String,
+                required: true
+            },
+            status:{
+                type: String,
+                required: true
+            }
+        }],
+        followers: [{
+            userName: {
+                type: String,
+                required: true
+            }
+        }],
+        following: [{
+            userName: {
+                type: String,
+                required: true
+            }
+        }]
+    },
     profilePicture: {
         type: String,
         required: false
