@@ -16,7 +16,7 @@ module.exports = (request, response) => {
 
             response.json({
                 success: false,
-                message: 'User not found'
+                data: 'User not found'
                 })
         })
 
