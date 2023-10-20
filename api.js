@@ -45,6 +45,7 @@ const likeComment = require('./src/controllers/forums/likeComment')
 const postReply = require('./src/controllers/forums/postReply')
 
 const searchUsers = require('./src/controllers/social/searchUsers')
+const followUser = require('./src/controllers/social/followUser')
 
 app.post('/register', register)
 app.post('/login', login)
@@ -74,6 +75,7 @@ app.get('/fetchComments', fetchComments)
 app.post('/postReply', postReply)
 
 app.post('/searchUsers', searchUsers)
+app.post('/followUser', followUser)
 
 //const updateUsers = require('./src/utils/updateUsers.js')
 
