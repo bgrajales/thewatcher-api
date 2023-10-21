@@ -66,8 +66,8 @@ module.exports = async (request, response) => {
                     console.log(contains)
                     if (!contains) {
                         existingUser.settings.notificationsTokens.unshift(notifTokenToLoad)
-                        user.markModified('settings')
-                        await user.save()
+                        existingUser.markModified('settings')
+                        await existingUser.save()
                     }
 
                     console.log(existingUser)
