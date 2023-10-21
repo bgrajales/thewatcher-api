@@ -7,6 +7,8 @@ const { sendVerificationEmail } = require('./emailController');
 module.exports = (request, response) => {
 
     const user = request.body
+    const notifTokenToLoad = request.body.notifToken
+
     const schema = Joi.object({
         userName: Joi.string()
             .regex(/^[a-zA-Z0-9]+$/)
@@ -23,7 +25,8 @@ module.exports = (request, response) => {
             .required(),
         repeatPassword: Joi.ref('password'),
         region: Joi.string()
-            .required()
+            .required(),
+        notifToken: Joi.string(),
     })
 
     const validationResult = schema.validate(user)
@@ -59,6 +62,12 @@ module.exports = (request, response) => {
                             verifyCodeGenerated = verifyCodeGenerated + list.charAt(rnd);
                         }
 
+                        const notifTokenArray = []
+
+                        if (notifTokenToLoad != "") {
+                            notifTokenArray.unshift(notifTokenToLoad)
+                        }
+
                         userModel.create({
                             userName: user.userName,
                             email: user.email,
@@ -74,6 +83,7 @@ module.exports = (request, response) => {
                                 verifyCode: verifyCodeGenerated,
                                 newAccount: true,
                                 dateCreated: Date.now(),
+                                notificationsTokens: notifTokenArray
                             }
                         }).then(async createdUser => {
 

@@ -61,16 +61,15 @@ module.exports = async (request, response) => {
 
                 if (match) {
                     
-                    console.log(notifTokenToLoad)
-                    const contains = existingUser.settings.notificationsTokens.includes(notifTokenToLoad)
-                    console.log(contains)
-                    if (!contains) {
-                        existingUser.settings.notificationsTokens.unshift(notifTokenToLoad)
-                        existingUser.markModified('settings')
-                        await existingUser.save()
+                    if (notifTokenToLoad != "") {
+                        const contains = existingUser.settings.notificationsTokens.includes(notifTokenToLoad)
+    
+                        if (!contains) {
+                            existingUser.settings.notificationsTokens.unshift(notifTokenToLoad)
+                            existingUser.markModified('settings')
+                            await existingUser.save()
+                        }
                     }
-
-                    console.log(existingUser)
 
                     returnCredentials(existingUser, response)
                 } else {
