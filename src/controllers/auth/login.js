@@ -45,6 +45,7 @@ module.exports = async (request, response) => {
             .min(8)
             .max(12)
             .required(),
+        notifToken: Joi.string(),
     })
 
     const validationResult = schema.validate(user)
