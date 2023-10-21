@@ -125,7 +125,11 @@ const userSchema = new Schema({
         dateCreated: {
             type: Date,
             required: false,
-        }
+        },
+        notificationsTokens: [{
+            type: String,
+            required: true
+        }]
     },
     social: {
         notifications: [{

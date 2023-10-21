@@ -1,20 +1,14 @@
 const { userModel } = require('../models/user')
-const { sendVerificationEmail } = require('../controllers/auth/emailController');  // Asegúrate de ajustar la ruta del archivo
 
 module.exports = async function updateUsers() {  
 
     const users = await userModel.find();
 
     for (const user of users) {
-        const newSocial = {
-          notifications: [],
-          followers: [],
-          following: [],
-        }
     
-        user.social = newSocial
+        user.settings.notificationsTokens = []
     
-        user.markModified("social")
+        user.markModified("settings")
         await user.save()
     }
 

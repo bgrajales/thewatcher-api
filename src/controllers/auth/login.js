@@ -29,7 +29,7 @@ const returnCredentials = (user, response) => {
     
 }
 
-module.exports = (request, response) => {
+module.exports = async (request, response) => {
 
     const user = request.body
     const schema = Joi.object({
@@ -45,19 +45,26 @@ module.exports = (request, response) => {
 
     const validationResult = schema.validate(user)
 
-
     if (!validationResult.error) {
 
         userModel.findOne({
             email: user.email
-        }).then(existingUser => {
+        }).then(async existingUser => {
 
             if (existingUser) {
                 const match = bcrypt.compareSync(user.password, existingUser.password)
 
                 if (match) {
-                    returnCredentials(existingUser, response)
+                    
+                    const contains = existingUser.settings.notificationsTokens.includes(user.notifToken)
 
+                    if (!contains) {
+                        existingUser.settings.notificationsTokens.unshift(user.notifToken)
+                        user.markModified('settings')
+                        await user.save()
+                    }
+
+                    returnCredentials(existingUser, response)
                 } else {
                     response.status(400).send({
                         error: 'Invalid password'
