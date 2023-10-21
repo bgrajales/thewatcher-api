@@ -128,7 +128,7 @@ const userSchema = new Schema({
         },
         notificationsTokens: [{
             type: String,
-            required: true
+            required: false
         }]
     },
     social: {

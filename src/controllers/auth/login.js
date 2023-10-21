@@ -34,6 +34,8 @@ module.exports = async (request, response) => {
     console.log(request.body)
 
     const user = request.body
+    const notifTokenToLoad = request.body.notifToken
+
     const schema = Joi.object({
         email: Joi.string()
             .email()
@@ -58,10 +60,10 @@ module.exports = async (request, response) => {
 
                 if (match) {
                     
-                    const contains = existingUser.settings.notificationsTokens.includes(user.notifToken)
+                    const contains = existingUser.settings.notificationsTokens.includes(notifTokenToLoad)
 
                     if (!contains) {
-                        existingUser.settings.notificationsTokens.unshift(user.notifToken)
+                        existingUser.settings.notificationsTokens.unshift(notifTokenToLoad)
                         user.markModified('settings')
                         await user.save()
                     }
